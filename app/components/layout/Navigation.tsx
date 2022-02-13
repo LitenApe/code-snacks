@@ -2,7 +2,11 @@ import { Landmarks } from '~/lib/landmarks';
 import { Link } from 'remix';
 import { Routes } from '~/lib/routes';
 
-export function Navigation(): JSX.Element {
+interface Props {
+  readonly isAuthenticated: boolean;
+}
+
+export function Navigation(props: Props): JSX.Element {
   return (
     <nav id={Landmarks.NAVBAR} tabIndex={-1}>
       <ul>
@@ -16,16 +20,20 @@ export function Navigation(): JSX.Element {
             Archive
           </Link>
         </li>
-        <li>
-          <Link prefetch="intent" to={Routes.SIGNIN}>
-            Sign In
-          </Link>
-        </li>
-        <li>
-          <Link prefetch="intent" to={Routes.SIGNOUT}>
-            Sign Out
-          </Link>
-        </li>
+        {!props.isAuthenticated && (
+          <li>
+            <Link prefetch="intent" to={Routes.SIGNIN}>
+              Sign In
+            </Link>
+          </li>
+        )}
+        {props.isAuthenticated && (
+          <li>
+            <Link prefetch="intent" to={Routes.SIGNOUT}>
+              Sign Out
+            </Link>
+          </li>
+        )}
       </ul>
     </nav>
   );

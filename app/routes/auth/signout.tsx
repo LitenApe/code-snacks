@@ -1,6 +1,7 @@
+import { LoaderFunction, redirect } from 'remix';
 import { auth, getCookie } from '~/lib/cookie';
 
-import type { LoaderFunction } from 'remix';
+import { Routes } from '~/lib/routes';
 
 export const loader: LoaderFunction = async ({
   request,
@@ -8,7 +9,7 @@ export const loader: LoaderFunction = async ({
   const cookie = await getCookie(request, auth);
 
   if (cookie.authorization !== true) {
-    throw new Response('Access denied', { status: 401 });
+    throw redirect(Routes.SIGNIN, { status: 302 });
   }
 
   cookie.authorization = null;

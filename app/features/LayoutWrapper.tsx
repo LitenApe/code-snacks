@@ -4,11 +4,15 @@ import { Navigation } from '../components/layout/Navigation';
 import { PropsWithChildren } from 'react';
 import { SkipLinks } from '../components/SkipLinks';
 
-export function LayoutWrapper(props: PropsWithChildren<unknown>): JSX.Element {
+interface Props {
+  readonly isAuthenticated?: boolean;
+}
+
+export function LayoutWrapper(props: PropsWithChildren<Props>): JSX.Element {
   return (
     <>
       <SkipLinks />
-      <Navigation />
+      <Navigation isAuthenticated={props.isAuthenticated || false} />
       <Main>{props.children}</Main>
       <Footer />
     </>

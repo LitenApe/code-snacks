@@ -1,11 +1,14 @@
 import {
   Links,
   LiveReload,
+  LoaderFunction,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from 'remix';
+import { auth, getCookie } from './lib/cookie';
 
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
 import { LayoutWrapper } from './features/LayoutWrapper';
@@ -16,7 +19,16 @@ export const meta: MetaFunction = () => {
   return { title: 'New Remix App' };
 };
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const cookie = await getCookie(request, auth);
+  return {
+    isAuthenticated: cookie.authorization === true,
+  };
+};
+
 export default function App(): JSX.Element {
+  const data = useLoaderData();
+
   return (
     <html lang="en">
       <head>
@@ -26,7 +38,7 @@ export default function App(): JSX.Element {
         <Links />
       </head>
       <body>
-        <LayoutWrapper>
+        <LayoutWrapper isAuthenticated={data.isAuthenticated}>
           <Outlet />
         </LayoutWrapper>
         <ScrollRestoration />
