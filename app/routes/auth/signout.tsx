@@ -2,7 +2,9 @@ import { auth, getCookie } from '~/lib/cookie';
 
 import type { LoaderFunction } from 'remix';
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({
+  request,
+}): Promise<Response> => {
   const cookie = await getCookie(request, auth);
 
   if (cookie.authorization !== true) {
@@ -18,7 +20,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   });
 };
 
-export default function SignOut() {
+export default function SignOut(): JSX.Element {
   return (
     <>
       <h1>Succefully signed out</h1>

@@ -1,4 +1,4 @@
-export function NotFound() {
+export function NotFound(): JSX.Element {
   return (
     <>
       <h1>Resource Not Found</h1>

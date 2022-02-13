@@ -18,7 +18,7 @@ function getExceptionMessage(status: number): JSX.Element {
   }
 }
 
-export function Multiplexer() {
+export function Multiplexer(): JSX.Element {
   const logger = new Log('CatchBoundary');
   const caught = useCatch();
   let children = getExceptionMessage(caught.status);

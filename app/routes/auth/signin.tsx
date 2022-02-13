@@ -42,7 +42,7 @@ export const action: ActionFunction = async ({
   });
 };
 
-export default function SignIn() {
+export default function SignIn(): JSX.Element {
   const action = useActionData();
 
   return (

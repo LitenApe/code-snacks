@@ -1,4 +1,4 @@
-export function InternalServerError() {
+export function InternalServerError(): JSX.Element {
   return (
     <>
       <h1>Unprocessable request</h1>

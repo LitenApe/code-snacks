@@ -1,4 +1,4 @@
-export function BadRequest() {
+export function BadRequest(): JSX.Element {
   return (
     <>
       <h1>Bad Request</h1>

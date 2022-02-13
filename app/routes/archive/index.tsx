@@ -1,6 +1,6 @@
 import { Link } from 'remix';
 
-export default function Archive() {
+export default function Archive(): JSX.Element {
   return (
     <>
       <h1>Archive</h1>

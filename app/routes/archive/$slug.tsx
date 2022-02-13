@@ -24,7 +24,7 @@ export const loader: LoaderFunction = ({ params }): Data => {
   };
 };
 
-export default function Post() {
+export default function Post(): JSX.Element {
   const data = useLoaderData<Data>();
 
   return (

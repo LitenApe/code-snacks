@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
   return { title: 'New Remix App' };
 };
 
-export default function App() {
+export default function App(): JSX.Element {
   return (
     <html lang="en">
       <head>
@@ -38,5 +38,4 @@ export default function App() {
 }
 
 export const CatchBoundary = KnownExceptionBoundary;
-
 export const ErrorBoundary = UnknownExceptionBoundary;
