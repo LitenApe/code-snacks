@@ -1,14 +1,13 @@
-import { LoaderFunction, useLoaderData } from 'remix';
-
+import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
+import { useLoaderData } from 'remix';
 
 interface Data {
   id: number;
 }
 
-export const loader: LoaderFunction = (args): Data => {
+export const loader: LoaderFunction = ({ params }): Data => {
   const logger = new Log('Archive Post');
-  const { params } = args;
 
   const postId =
     typeof params.slug !== 'undefined'

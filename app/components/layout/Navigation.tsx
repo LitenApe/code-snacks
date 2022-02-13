@@ -16,6 +16,16 @@ export function Navigation(): JSX.Element {
             Archive
           </Link>
         </li>
+        <li>
+          <Link prefetch="intent" to={Routes.SIGNIN}>
+            Sign In
+          </Link>
+        </li>
+        <li>
+          <Link prefetch="intent" to={Routes.SIGNOUT}>
+            Sign Out
+          </Link>
+        </li>
       </ul>
     </nav>
   );
