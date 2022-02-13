@@ -9,6 +9,7 @@ import {
 
 import { Footer } from './components/layout/Footer';
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
+import { Landmarks } from './lib/landmarks';
 import type { MetaFunction } from 'remix';
 import { Navigation } from './components/layout/Navigation';
 import { SkipLinks } from './components/SkipLinks';
@@ -30,7 +31,7 @@ export default function App() {
       <body>
         <SkipLinks />
         <Navigation />
-        <main id="main-content" tabIndex={-1}>
+        <main id={Landmarks.MAIN} tabIndex={-1}>
           <Outlet />
         </main>
         <Footer />
