@@ -1,7 +1,7 @@
 export function NotFound() {
   return (
     <>
-      <h1>404: Not Found</h1>
+      <h1>Resource Not Found</h1>
       <p>
         The resource you are attempting to access is unavailable. It is either
         missing or you might not have necessary privileges to view the requested
