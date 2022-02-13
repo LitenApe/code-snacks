@@ -7,12 +7,9 @@ import {
   ScrollRestoration,
 } from 'remix';
 
-import { Footer } from './components/layout/Footer';
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
-import { Landmarks } from './lib/landmarks';
+import { LayoutWrapper } from './features/LayoutWrapper';
 import type { MetaFunction } from 'remix';
-import { Navigation } from './components/layout/Navigation';
-import { SkipLinks } from './components/SkipLinks';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 
 export const meta: MetaFunction = () => {
@@ -29,12 +26,9 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <SkipLinks />
-        <Navigation />
-        <main id={Landmarks.MAIN} tabIndex={-1}>
+        <LayoutWrapper>
           <Outlet />
-        </main>
-        <Footer />
+        </LayoutWrapper>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}

@@ -2,7 +2,7 @@ import { Landmarks } from '~/lib/landmarks';
 import { Link } from 'remix';
 import { Routes } from '~/lib/routes';
 
-export function Navigation() {
+export function Navigation(): JSX.Element {
   return (
     <nav id={Landmarks.NAVBAR} tabIndex={-1}>
       <ul>

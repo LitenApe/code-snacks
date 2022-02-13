@@ -1,6 +1,6 @@
 import { Landmarks } from '~/lib/landmarks';
 
-export function SkipLinks() {
+export function SkipLinks(): JSX.Element {
   return (
     <nav>
       <ul>
