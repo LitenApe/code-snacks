@@ -5,16 +5,19 @@ import { PropsWithChildren } from 'react';
 import { SkipLinks } from '../components/SkipLinks';
 
 interface Props {
+  readonly texts: any;
   readonly isAuthenticated?: boolean;
 }
 
 export function LayoutWrapper(props: PropsWithChildren<Props>): JSX.Element {
+  const { children, texts, isAuthenticated } = props;
+
   return (
     <>
       <SkipLinks />
-      <Navigation isAuthenticated={props.isAuthenticated || false} />
-      <Main>{props.children}</Main>
-      <Footer />
+      <Navigation isAuthenticated={isAuthenticated || false} />
+      <Main>{children}</Main>
+      <Footer texts={texts.footer} />
     </>
   );
 }
