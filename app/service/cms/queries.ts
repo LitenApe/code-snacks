@@ -1,4 +1,6 @@
-export const posts = `
+import { gql } from '@apollo/client';
+
+export const posts = gql`
   query {
     posts {
       data {
@@ -8,7 +10,7 @@ export const posts = `
           tags {
             data {
               attributes {
-                name      
+                name
               }
             }
           }
@@ -22,7 +24,7 @@ export const posts = `
   }
 `;
 
-export const drafs = `
+export const drafts = gql`
   query {
     posts(publicationState: PREVIEW, filters: { publishedAt: null }) {
       data {
@@ -32,7 +34,7 @@ export const drafs = `
           tags {
             data {
               attributes {
-                name      
+                name
               }
             }
           }
@@ -45,7 +47,7 @@ export const drafs = `
   }
 `;
 
-export const tags = `
+export const tags = gql`
   query {
     tags {
       data {
@@ -57,7 +59,7 @@ export const tags = `
   }
 `;
 
-export const footer = `
+export const footer = gql`
   query {
     footer {
       data {
