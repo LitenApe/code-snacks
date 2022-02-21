@@ -24,6 +24,29 @@ export const posts = gql`
   }
 `;
 
+export const post = gql`
+  query ($id: ID!) {
+    posts(filters: { id: { eq: $id } }) {
+      data {
+        id
+        attributes {
+          title
+          tags {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          content
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+
 export const drafts = gql`
   query {
     posts(publicationState: PREVIEW, filters: { publishedAt: null }) {
@@ -53,18 +76,6 @@ export const tags = gql`
       data {
         attributes {
           name
-        }
-      }
-    }
-  }
-`;
-
-export const footer = gql`
-  query {
-    footer {
-      data {
-        attributes {
-          credits
         }
       }
     }

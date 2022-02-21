@@ -12,6 +12,10 @@ export class Log implements Logger {
       process.env.NODE_ENV === 'development' ? new Console() : new Fake();
   }
 
+  debug(...args: Array<unknown>): void {
+    this.#src.debug(`[name=${this.#name}]`, ...args);
+  }
+
   info(...args: Array<unknown>): void {
     this.#src.info(`[name=${this.#name}]`, ...args);
   }

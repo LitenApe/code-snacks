@@ -14,23 +14,16 @@ import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundar
 import { LayoutWrapper } from './features/LayoutWrapper';
 import type { MetaFunction } from 'remix';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
-import { CMS } from './service/cms';
 
 export const meta: MetaFunction = () => {
   return { title: 'New Remix App' };
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const cms = new CMS();
   const cookie = await getCookie(request, auth);
-
-  const footer = await cms.getFooter();
 
   return {
     isAuthenticated: cookie.authorization === true,
-    texts: {
-      footer,
-    },
   };
 };
 
@@ -46,10 +39,7 @@ export default function App(): JSX.Element {
         <Links />
       </head>
       <body>
-        <LayoutWrapper
-          texts={data.texts}
-          isAuthenticated={data.isAuthenticated}
-        >
+        <LayoutWrapper isAuthenticated={data.isAuthenticated}>
           <Outlet />
         </LayoutWrapper>
         <ScrollRestoration />

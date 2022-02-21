@@ -1,7 +1,7 @@
 export interface Posts {
   posts: {
     data: Array<{
-      id: 'string';
+      id: string;
       attributes: {
         title: string;
         tags: Tags['tags'];
@@ -14,13 +14,19 @@ export interface Posts {
   };
 }
 
-export interface Footer {
-  footer: {
-    data: {
+export interface Post {
+  posts: {
+    data: Array<{
+      id: string;
       attributes: {
-        credits: string;
+        title: string;
+        tags: Tags['tags'];
+        content: string;
+        createdAt: string;
+        updatedAt: string;
+        publishedAt?: string;
       };
-    };
+    }>;
   };
 }
 
