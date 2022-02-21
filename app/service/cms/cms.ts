@@ -7,6 +7,7 @@ import {
 } from './queries';
 import 'dotenv/config';
 import { Footer, Posts, Tag, Tags } from './domain';
+import { toHTML } from '~/lib/markdown';
 
 export class CMS {
   #client;

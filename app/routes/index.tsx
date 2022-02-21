@@ -1,7 +1,7 @@
 export default function Index(): JSX.Element {
   return (
     <>
-      <h1>Code Snacks</h1>
+      <h1>Tech Snacks</h1>
     </>
   );
 }
