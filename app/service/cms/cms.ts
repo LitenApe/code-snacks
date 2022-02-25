@@ -1,9 +1,10 @@
-import { ApolloClient, InMemoryCache, QueryResult } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import {
-  posts as publised,
-  drafts as notPublised,
-  tags,
-  post,
+  post as postQuery,
+  posts as postsQuery,
+  draft as draftQuery,
+  drafts as draftsQuery,
+  tags as tagsQuery,
 } from './queries';
 import 'dotenv/config';
 import { Post, Posts, Tags } from './domain';
@@ -28,11 +29,12 @@ export class CMS {
   }
 
   async getPost(
-    id: number
+    id: number,
+    preview: boolean = false
   ): Promise<Post['posts']['data'][number] | undefined> {
     this.#logger.debug(`Retrieving post [id=${id}]`);
     const res = await this.#client.query<Post>({
-      query: post,
+      query: preview ? draftQuery : postQuery,
       variables: {
         id,
       },
@@ -45,7 +47,7 @@ export class CMS {
   async getPosts(preview: boolean = false): Promise<Posts['posts']['data']> {
     this.#logger.debug('Retrieving posts');
     const res = await this.#client.query<Posts>({
-      query: preview ? notPublised : publised,
+      query: preview ? draftsQuery : postsQuery,
     });
     this.#logger.debug(`Found [length=${res.data.posts.data.length}] posts`);
     return res.data.posts.data;
@@ -54,7 +56,7 @@ export class CMS {
   async getTags(): Promise<Tags['tags']['data']> {
     this.#logger.debug('Retrieving tags');
     const res = await this.#client.query<Tags>({
-      query: tags,
+      query: tagsQuery,
     });
     this.#logger.debug(`Found [length=${res.data.tags.data.length}] tags`);
     return res.data.tags.data;

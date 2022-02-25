@@ -70,6 +70,32 @@ export const drafts = gql`
   }
 `;
 
+export const draft = gql`
+  query ($id: ID!) {
+    posts(
+      publicationState: PREVIEW
+      filters: { id: { eq: $id }, publishedAt: null }
+    ) {
+      data {
+        id
+        attributes {
+          title
+          tags {
+            data {
+              attributes {
+                name
+              }
+            }
+          }
+          content
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+
 export const tags = gql`
   query {
     tags {
