@@ -1,5 +1,5 @@
 import { BadRequest } from './BadRequest';
-import { LayoutWrapper } from '../LayoutWrapper';
+import { Layout } from '../Layout';
 import { Log } from '~/service/logger';
 import { NotFound } from './NotFound';
 import { Unauthorized } from './Unauthorized';
@@ -23,5 +23,5 @@ export function Multiplexer(): JSX.Element {
   const caught = useCatch();
   let children = getExceptionMessage(caught.status);
   logger.error(`[status=${caught.status}]`, `[data=${caught.data}]`);
-  return <LayoutWrapper>{children}</LayoutWrapper>;
+  return <Layout>{children}</Layout>;
 }

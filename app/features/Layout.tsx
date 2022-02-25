@@ -8,7 +8,7 @@ interface Props {
   readonly isAuthenticated?: boolean;
 }
 
-export function LayoutWrapper(props: PropsWithChildren<Props>): JSX.Element {
+export function Layout(props: PropsWithChildren<Props>): JSX.Element {
   const { children, isAuthenticated } = props;
 
   return (

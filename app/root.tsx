@@ -11,7 +11,7 @@ import {
 import { auth, getCookie } from './lib/cookie';
 
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
-import { LayoutWrapper } from './features/LayoutWrapper';
+import { Layout } from './features/Layout';
 import type { MetaFunction } from 'remix';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 
@@ -39,9 +39,9 @@ export default function App(): JSX.Element {
         <Links />
       </head>
       <body>
-        <LayoutWrapper isAuthenticated={data.isAuthenticated}>
+        <Layout isAuthenticated={data.isAuthenticated}>
           <Outlet />
-        </LayoutWrapper>
+        </Layout>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
