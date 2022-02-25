@@ -9,11 +9,12 @@ import {
 import 'dotenv/config';
 import { Post, PostDTO, Posts, Tags } from './domain';
 import { Log } from '../logger';
-import { toHTML } from '~/lib/markdown';
+import { marked } from 'marked';
 
 export class CMS {
   #client;
   #logger;
+  #parser;
 
   constructor(options: Record<string, unknown> = {}) {
     this.#logger = new Log('CMS');
@@ -26,6 +27,12 @@ export class CMS {
             Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
           }
         : {},
+    });
+    this.#parser = marked;
+    marked.setOptions({
+      breaks: true,
+      gfm: true,
+      headerIds: true,
     });
   }
 
@@ -45,7 +52,7 @@ export class CMS {
     return {
       id: data[0].id,
       ...data[0].attributes,
-      content: toHTML(data[0].attributes.content),
+      content: this.#parser(data[0].attributes.content),
     };
   }
 
@@ -58,7 +65,7 @@ export class CMS {
     return res.data.posts.data.map((post) => ({
       id: post.id,
       ...post.attributes,
-      content: toHTML(post.attributes.content),
+      content: this.#parser(post.attributes.content),
     }));
   }
 

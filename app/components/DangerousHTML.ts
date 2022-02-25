@@ -1,5 +1,4 @@
 import React from 'react';
-import { toHTML } from '~/lib/markdown';
 
 interface Props {
   readonly content: string;
@@ -11,6 +10,6 @@ export function DangerousHTML(
   const { content, ...rest } = props;
   return React.createElement('div', {
     ...rest,
-    dangerouslySetInnerHTML: { __html: toHTML(content) },
+    dangerouslySetInnerHTML: { __html: content },
   });
 }
