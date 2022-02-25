@@ -11,7 +11,7 @@ interface Data {
 }
 
 export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
-  const logger = new Log('Archive Post');
+  const logger = new Log('Draft Post');
   const cms = new CMS();
 
   const postId =
@@ -24,7 +24,7 @@ export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
     throw new Response('Invalid request', { status: 400 });
   }
 
-  const post = await cms.getPost(postId);
+  const post = await cms.getPost(postId, true);
 
   if (typeof post === 'undefined') {
     logger.error(`Unable to find post with [id=${postId}]`);

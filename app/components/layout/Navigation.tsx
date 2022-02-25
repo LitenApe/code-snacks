@@ -20,6 +20,11 @@ export function Navigation(props: Props): JSX.Element {
             Archive
           </Link>
         </li>
+        <li>
+          <Link prefetch="intent" to={Routes.DRAFTS}>
+            Drafts
+          </Link>
+        </li>
         {!props.isAuthenticated && (
           <li>
             <Link prefetch="intent" to={Routes.SIGNIN}>
