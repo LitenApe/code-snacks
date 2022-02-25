@@ -2,9 +2,9 @@ import { Link, useLoaderData } from 'remix';
 import { DangerousHTML } from '~/components/DangerousHTML';
 import { Routes } from '~/lib/routes';
 import { CMS } from '~/service/cms';
-import { Posts } from '~/service/cms/domain';
+import { PostDTO } from '~/service/cms/domain';
 
-type Data = Array<Posts['posts']['data'][number]>;
+type Data = Array<PostDTO>;
 
 export async function loader(): Promise<Data> {
   const cms = new CMS();
@@ -24,17 +24,13 @@ export default function Drafts(): JSX.Element {
             <article>
               <header>
                 <h2>
-                  <Link to={`${Routes.DRAFTS}/${post.id}`}>
-                    {post.attributes.title}
-                  </Link>
+                  <Link to={`${Routes.DRAFTS}/${post.id}`}>{post.title}</Link>
                 </h2>
                 <p>
-                  <time dateTime={post.attributes.publishedAt}>
-                    {post.attributes.publishedAt}
-                  </time>
+                  <time dateTime={post.createdAt}>{post.createdAt}</time>
                 </p>
               </header>
-              <DangerousHTML content={post.attributes.content} />
+              <DangerousHTML content={post.content} />
             </article>
           </li>
         ))}

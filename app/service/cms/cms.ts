@@ -7,8 +7,9 @@ import {
   tags as tagsQuery,
 } from './queries';
 import 'dotenv/config';
-import { Post, Posts, Tags } from './domain';
+import { Post, PostDTO, Posts, Tags } from './domain';
 import { Log } from '../logger';
+import { toHTML } from '~/lib/markdown';
 
 export class CMS {
   #client;
@@ -31,7 +32,7 @@ export class CMS {
   async getPost(
     id: number,
     preview: boolean = false
-  ): Promise<Post['posts']['data'][number] | undefined> {
+  ): Promise<PostDTO | undefined> {
     this.#logger.debug(`Retrieving post [id=${id}]`);
     const res = await this.#client.query<Post>({
       query: preview ? draftQuery : postQuery,
@@ -41,16 +42,24 @@ export class CMS {
     });
     const data = res.data.posts.data;
     this.#logger.debug(`Found [length=${data.length}] with [id=${id}]`);
-    return data[0];
+    return {
+      id: data[0].id,
+      ...data[0].attributes,
+      content: toHTML(data[0].attributes.content),
+    };
   }
 
-  async getPosts(preview: boolean = false): Promise<Posts['posts']['data']> {
+  async getPosts(preview: boolean = false): Promise<Array<PostDTO>> {
     this.#logger.debug('Retrieving posts');
     const res = await this.#client.query<Posts>({
       query: preview ? draftsQuery : postsQuery,
     });
     this.#logger.debug(`Found [length=${res.data.posts.data.length}] posts`);
-    return res.data.posts.data;
+    return res.data.posts.data.map((post) => ({
+      id: post.id,
+      ...post.attributes,
+      content: toHTML(post.attributes.content),
+    }));
   }
 
   async getTags(): Promise<Tags['tags']['data']> {

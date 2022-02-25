@@ -2,11 +2,11 @@ import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
 import { useLoaderData } from 'remix';
 import { CMS } from '~/service/cms';
-import { Post } from '~/service/cms/domain';
+import { PostDTO } from '~/service/cms/domain';
 import { DangerousHTML } from '~/components/DangerousHTML';
 
 interface Data {
-  post: Post['posts']['data'][number];
+  post: PostDTO;
   id: number;
 }
 
@@ -42,8 +42,8 @@ export default function Post(): JSX.Element {
 
   return (
     <>
-      <h1>{data.post.attributes.title}</h1>
-      <DangerousHTML content={data.post.attributes.content} />
+      <h1>{data.post.title}</h1>
+      <DangerousHTML content={data.post.content} />
     </>
   );
 }
