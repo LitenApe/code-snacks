@@ -47,12 +47,19 @@ export class CMS {
         id,
       },
     });
-    const data = res.data.posts.data;
-    this.#logger.debug(`Found [length=${data.length}] with [id=${id}]`);
+    const data = res.data.posts.data[0];
+
+    if (typeof data === 'undefined') {
+      this.#logger.error(`Unable to retrieve post with [id=${id}]`);
+      return undefined;
+    }
+
+    this.#logger.debug(`Retrieved post with [id=${id}]`);
+
     return {
-      id: data[0].id,
-      ...data[0].attributes,
-      content: this.#parser(data[0].attributes.content),
+      id: data.id,
+      ...data.attributes,
+      content: this.#parser(data.attributes.content),
     };
   }
 
@@ -61,7 +68,9 @@ export class CMS {
     const res = await this.#client.query<Posts>({
       query: preview ? draftsQuery : postsQuery,
     });
-    this.#logger.debug(`Found [length=${res.data.posts.data.length}] posts`);
+    this.#logger.debug(
+      `Retrieved [length=${res.data.posts.data.length}] posts`
+    );
     return res.data.posts.data.map((post) => ({
       id: post.id,
       ...post.attributes,
@@ -74,7 +83,7 @@ export class CMS {
     const res = await this.#client.query<Tags>({
       query: tagsQuery,
     });
-    this.#logger.debug(`Found [length=${res.data.tags.data.length}] tags`);
+    this.#logger.debug(`Retrieved [length=${res.data.tags.data.length}] tags`);
     return res.data.tags.data;
   }
 }
