@@ -1,56 +1,78 @@
 import { gql } from '@apollo/client';
 
-const postFragment = `
-  data {
-    id
-    attributes {
-      title
-      tags {
-        data {
-          attributes {
-            name
-          }
+const postFragment = gql`
+  fragment CorePostFields on Post {
+    title
+    tags {
+      data {
+        attributes {
+          name
         }
       }
-      content
-      createdAt
-      updatedAt
-      publishedAt
     }
+    content
+    createdAt
+    updatedAt
   }
 `;
 
 export const posts = gql`
+  ${postFragment}
   query {
     posts {
-      ${postFragment}
+      data {
+        id
+        attributes {
+          ...CorePostFields
+          publishedAt
+        }
+      }
     }
   }
 `;
 
 export const post = gql`
+  ${postFragment}
   query ($id: ID!) {
     posts(filters: { id: { eq: $id } }) {
-      ${postFragment}
+      data {
+        id
+        attributes {
+          ...CorePostFields
+          publishedAt
+        }
+      }
     }
   }
 `;
 
 export const drafts = gql`
+  ${postFragment}
   query {
     posts(publicationState: PREVIEW, filters: { publishedAt: null }) {
-      ${postFragment}
+      data {
+        id
+        attributes {
+          ...CorePostFields
+        }
+      }
     }
   }
 `;
 
 export const draft = gql`
+  ${postFragment}
   query ($id: ID!) {
     posts(
       publicationState: PREVIEW
       filters: { id: { eq: $id }, publishedAt: null }
     ) {
-      ${postFragment}
+      data {
+        id
+        attributes {
+          ...CorePostFields
+        }
+      }
     }
   }
 `;

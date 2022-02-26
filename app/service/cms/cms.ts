@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloError, InMemoryCache } from '@apollo/client';
 import {
   post as postQuery,
   posts as postsQuery,
@@ -47,6 +47,14 @@ export class CMS {
         id,
       },
     });
+
+    if (typeof res.error !== 'undefined') {
+      this.#logger.error(
+        `Encountered an error while retrieving post with [id=${id}]. Service returned [message=${res.error.message}]`
+      );
+      return undefined;
+    }
+
     const data = res.data.posts.data[0];
 
     if (typeof data === 'undefined') {
@@ -65,12 +73,14 @@ export class CMS {
 
   async getPosts(preview: boolean = false): Promise<Array<PostDTO>> {
     this.#logger.debug('Retrieving posts');
+
     const res = await this.#client.query<Posts>({
       query: preview ? draftsQuery : postsQuery,
     });
     this.#logger.debug(
       `Retrieved [length=${res.data.posts.data.length}] posts`
     );
+
     return res.data.posts.data.map((post) => ({
       id: post.id,
       ...post.attributes,
