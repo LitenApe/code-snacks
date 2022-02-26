@@ -29,6 +29,7 @@ export interface PostDTO extends PostAttributes {
 }
 
 export interface Tag {
+  id: string;
   attributes: {
     name: string;
   };

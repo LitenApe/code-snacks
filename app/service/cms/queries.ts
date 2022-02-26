@@ -5,6 +5,7 @@ const postFragment = gql`
     title
     tags {
       data {
+        id
         attributes {
           name
         }
@@ -81,8 +82,55 @@ export const tags = gql`
   query {
     tags {
       data {
+        id
         attributes {
           name
+        }
+      }
+    }
+  }
+`;
+
+const postPost = gql`
+  ${postFragment}
+  mutation ($data: PostInput!) {
+    createPost(data: $datat) {
+      data {
+        id
+        attributes {
+          ...CorePostFields
+        }
+      }
+    }
+  }
+`;
+
+const putPost = gql`
+  ${postFragment}
+  mutation ($id: ID!, $data: PostInput!) {
+    updatePost(id: $id, data: $data) {
+      data {
+        id
+        attributes {
+          ...CorePostFields
+        }
+      }
+    }
+  }
+`;
+
+const postTag = gql`
+  mutation ($data: TagInput!) {
+    createTag(data: $data) {
+      data {
+        id
+        attributes {
+          name
+          posts {
+            data {
+              id
+            }
+          }
         }
       }
     }
