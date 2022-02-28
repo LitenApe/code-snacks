@@ -19,7 +19,7 @@ export default function Drafts(): JSX.Element {
     <>
       <h1>Archive</h1>
       <ul>
-        {data.map((post) => (
+        {data.map((post: PostDTO) => (
           <li key={`post-${post.id}`}>
             <article>
               <header>
