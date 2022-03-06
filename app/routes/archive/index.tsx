@@ -1,8 +1,7 @@
-import { Link, useLoaderData } from 'remix';
-import { DangerousHTML } from '~/components/DangerousHTML';
-import { Routes } from '~/lib/routes';
+import { ArticleOverview } from '~/features/ArticleOverview';
 import { CMS } from '~/service/cms';
 import { PostDTO } from '~/service/cms/domain';
+import { useLoaderData } from 'remix';
 
 type Data = Array<PostDTO>;
 
@@ -18,25 +17,7 @@ export default function Archive(): JSX.Element {
   return (
     <>
       <h1>Archive</h1>
-      <ul>
-        {data.map((post: PostDTO) => (
-          <li key={`post-${post.id}`}>
-            <article>
-              <header>
-                <h2>
-                  <Link to={`${Routes.ARCHIVE}/${post.id}`}>{post.title}</Link>
-                </h2>
-                <p>
-                  <time dateTime={`${post.publishedAt}`}>
-                    {post.publishedAt}
-                  </time>
-                </p>
-              </header>
-              <DangerousHTML content={post.content} />
-            </article>
-          </li>
-        ))}
-      </ul>
+      <ArticleOverview posts={data} />
     </>
   );
 }
