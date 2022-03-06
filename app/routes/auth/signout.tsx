@@ -14,7 +14,7 @@ export const loader: LoaderFunction = async ({
 
   cookie.authorization = null;
 
-  return new Response(null, {
+  return redirect(Routes.HOME, {
     headers: {
       'Set-Cookie': await auth.serialize(cookie, { maxAge: 0 }),
     },
