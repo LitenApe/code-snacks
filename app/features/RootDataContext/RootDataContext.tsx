@@ -27,7 +27,7 @@ export function RootDataProvider(
 ): JSX.Element {
   const { children, authCookie } = props;
   const [isAuthenticated, setIsAuthenticated] = React.useState(
-    () => authCookie.authorization,
+    authCookie.authorization,
   );
 
   React.useEffect(() => {

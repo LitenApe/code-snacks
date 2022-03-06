@@ -3,9 +3,31 @@ import { Link } from 'remix';
 import { Routes } from '~/lib/routes';
 import { useRootData } from '~/features/RootDataContext/RootDataContext';
 
+const authenticatedRoutes = [
+  {
+    uri: Routes.DRAFTS,
+    label: 'Drafts',
+  },
+  {
+    uri: Routes.SIGNOUT,
+    label: 'Sign Out',
+  },
+];
+
+const unauthenticatedRoutes = [
+  {
+    uri: Routes.SIGNIN,
+    label: 'Sign In',
+  },
+];
+
 export function Navigation(): JSX.Element {
   const rootData = useRootData();
   const { isAuthenticated } = rootData;
+
+  const additionalRoutes = isAuthenticated
+    ? authenticatedRoutes
+    : unauthenticatedRoutes;
 
   return (
     <nav id={Landmarks.NAVBAR} tabIndex={-1}>
@@ -20,25 +42,13 @@ export function Navigation(): JSX.Element {
             Archive
           </Link>
         </li>
-        <li>
-          <Link prefetch="intent" to={Routes.DRAFTS}>
-            Drafts
-          </Link>
-        </li>
-        {!isAuthenticated && (
-          <li>
-            <Link prefetch="intent" to={Routes.SIGNIN}>
-              Sign In
+        {additionalRoutes.map(({ uri, label }) => (
+          <li key={`navigation-route-${isAuthenticated}-${uri}`}>
+            <Link prefetch="intent" to={uri}>
+              {label}
             </Link>
           </li>
-        )}
-        {isAuthenticated && (
-          <li>
-            <Link prefetch="intent" to={Routes.SIGNOUT}>
-              Sign Out
-            </Link>
-          </li>
-        )}
+        ))}
       </ul>
     </nav>
   );
