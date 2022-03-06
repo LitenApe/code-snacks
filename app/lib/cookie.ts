@@ -5,6 +5,9 @@ export const auth = createCookie('auth', {
   path: '/',
   maxAge: 604_800,
   sameSite: 'strict',
+  secrets: [process.env.COOKIE_SECRET as string],
+  secure: true,
+  httpOnly: true,
 });
 
 export async function getCookie<T = any>(
