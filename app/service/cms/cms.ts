@@ -1,19 +1,25 @@
-import { ApolloClient, ApolloError, InMemoryCache } from '@apollo/client';
+import 'dotenv/config';
+
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 import {
-  post as postQuery,
-  posts as postsQuery,
+  Post, PostDTO, Posts, Tags,
+} from './domain';
+import {
   draft as draftQuery,
   drafts as draftsQuery,
+  post as postQuery,
+  posts as postsQuery,
   tags as tagsQuery,
 } from './queries';
-import 'dotenv/config';
-import { Post, PostDTO, Posts, Tags } from './domain';
+
 import { Log } from '../logger';
 import { marked } from 'marked';
 
 export class CMS {
   #client;
+
   #logger;
+
   #parser;
 
   constructor(options: Record<string, unknown> = {}) {
@@ -24,8 +30,8 @@ export class CMS {
       ssrMode: true,
       headers: options.isAuthenticated
         ? {
-            Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
-          }
+          Authorization: `Bearer ${process.env.STRAPI_API_KEY}`,
+        }
         : {},
     });
     this.#parser = marked;
@@ -38,7 +44,7 @@ export class CMS {
 
   async getPost(
     id: number,
-    preview: boolean = false
+    preview: boolean = false,
   ): Promise<PostDTO | undefined> {
     this.#logger.debug(`Retrieving post [id=${id}]`);
     const res = await this.#client.query<Post>({
@@ -50,7 +56,7 @@ export class CMS {
 
     if (typeof res.error !== 'undefined') {
       this.#logger.error(
-        `Encountered an error while retrieving post with [id=${id}]. Service returned [message=${res.error.message}]`
+        `Encountered an error while retrieving post with [id=${id}]. Service returned [message=${res.error.message}]`,
       );
       return undefined;
     }
@@ -78,7 +84,7 @@ export class CMS {
       query: preview ? draftsQuery : postsQuery,
     });
     this.#logger.debug(
-      `Retrieved [length=${res.data.posts.data.length}] posts`
+      `Retrieved [length=${res.data.posts.data.length}] posts`,
     );
 
     return res.data.posts.data.map((post) => ({

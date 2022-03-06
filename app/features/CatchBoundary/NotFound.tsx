@@ -8,7 +8,7 @@ export function NotFound(): JSX.Element {
         information.
       </p>
       <p>
-        If you should have access, but still can't access it, then please
+        If you should have access, but still can&apos;t access it, then please
         confirm that it exist. First by visiting the content management system,
         afterward, check that your desired route is configured in the code
         itself.

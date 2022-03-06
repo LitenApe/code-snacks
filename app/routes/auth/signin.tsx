@@ -1,7 +1,7 @@
-import { ActionFunction, redirect, useActionData } from 'remix';
+// eslint-disable-next-line object-curly-newline
+import { ActionFunction, Form, redirect, useActionData } from 'remix';
 import { auth, getCookie } from '~/lib/cookie';
 
-import { Form } from 'remix';
 import { Routes } from '~/lib/routes';
 
 interface ErrorResponse {
@@ -22,11 +22,11 @@ export const action: ActionFunction = async ({
     const errors: ErrorResponse = {};
 
     if (payload.get('identifier') === null) {
-      errors['identifier'] = 'Identifier is required';
+      errors.identifier = 'Identifier is required';
     }
 
     if (payload.get('password') === null) {
-      errors['password'] = 'Password is required';
+      errors.password = 'Password is required';
     }
 
     return errors;
@@ -43,18 +43,22 @@ export const action: ActionFunction = async ({
 };
 
 export default function SignIn(): JSX.Element {
-  const action = useActionData();
+  const data = useActionData();
 
   return (
     <>
       <h1>Sign In</h1>
       <Form method="post">
-        <label htmlFor="idetifier">Identifier</label>
-        <input id="identifier" name="identifier" type="text" required />
-        <label htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" required />
+        <label htmlFor="idetifier">
+          Identifier
+          <input id="identifier" name="identifier" type="text" required />
+        </label>
+        <label htmlFor="password">
+          Password
+          <input id="password" name="password" type="password" required />
+        </label>
 
-        <div>{JSON.stringify(action)}</div>
+        <div>{JSON.stringify(data)}</div>
 
         <button type="submit">Sign In</button>
       </Form>

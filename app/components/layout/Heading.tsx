@@ -5,9 +5,10 @@ interface Props {
 }
 
 export function Heading<T extends keyof JSX.IntrinsicElements = 'h1'>(
-  props: Props & React.ComponentProps<T>
+  props: Props & React.ComponentProps<T>,
 ): JSX.Element {
   const { level, ...rest } = props;
+  // eslint-disable-next-line no-shadow
   const Heading = `h${level}`;
 
   return <Heading {...rest} />;

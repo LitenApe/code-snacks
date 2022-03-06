@@ -91,6 +91,7 @@ export const tags = gql`
   }
 `;
 
+// eslint-disable-next-line no-unused-vars
 const postPost = gql`
   ${postFragment}
   mutation ($data: PostInput!) {
@@ -105,6 +106,7 @@ const postPost = gql`
   }
 `;
 
+// eslint-disable-next-line no-unused-vars
 const putPost = gql`
   ${postFragment}
   mutation ($id: ID!, $data: PostInput!) {
@@ -119,6 +121,7 @@ const putPost = gql`
   }
 `;
 
+// eslint-disable-next-line no-unused-vars
 const postTag = gql`
   mutation ($data: TagInput!) {
     createTag(data: $data) {

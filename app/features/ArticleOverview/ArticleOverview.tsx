@@ -16,7 +16,7 @@ export function ArticleOverview(props: Props): JSX.Element {
           <li key={`article-overview-${post.id}`}>
             <ArticleCard post={post} level={level} />
           </li>
-        )
+        ),
       )}
     </ul>
   );

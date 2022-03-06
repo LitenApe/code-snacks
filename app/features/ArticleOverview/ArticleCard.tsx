@@ -1,5 +1,5 @@
-import { Heading } from '~/components/layout/Heading';
 import { Link } from 'remix';
+import { Heading } from '~/components/layout/Heading';
 import { PostDTO } from '~/service/cms/domain';
 import { Routes } from '~/lib/routes';
 import { isDefined } from '~/lib/isDefined';
@@ -11,7 +11,9 @@ interface Props {
 
 export function ArticleCard(props: Props): JSX.Element {
   const { post, level = 2 } = props;
-  const { id, title, publishedAt, createdAt } = post;
+  const {
+    id, title, publishedAt, createdAt,
+  } = post;
   const isDraft = !isDefined(publishedAt);
   const timestamp = isDraft ? createdAt : publishedAt;
   const uri = isDraft ? Routes.DRAFTS : Routes.ARCHIVE;

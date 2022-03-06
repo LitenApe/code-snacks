@@ -14,14 +14,14 @@ function getExceptionMessage(status: number): JSX.Element {
     case 404:
       return <NotFound />;
     default:
-      return <h1>{status}: We can't process your request!</h1>;
+      return <h1>{status}: We can&apos;t process your request!</h1>;
   }
 }
 
 export function Multiplexer(): JSX.Element {
   const logger = new Log('CatchBoundary');
   const caught = useCatch();
-  let children = getExceptionMessage(caught.status);
+  const children = getExceptionMessage(caught.status);
   logger.error(`[status=${caught.status}]`, `[data=${caught.data}]`);
   return <Layout>{children}</Layout>;
 }

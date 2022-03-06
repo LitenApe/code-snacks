@@ -1,3 +1,16 @@
+export interface Tag {
+  id: string;
+  attributes: {
+    name: string;
+  };
+}
+
+export interface Tags {
+  tags: {
+    data: Array<Tag>;
+  };
+}
+
 interface PostAttributes {
   title: string;
   tags: Tags['tags'];
@@ -26,17 +39,4 @@ export interface Post {
 
 export interface PostDTO extends PostAttributes {
   id: string;
-}
-
-export interface Tag {
-  id: string;
-  attributes: {
-    name: string;
-  };
-}
-
-export interface Tags {
-  tags: {
-    data: Array<Tag>;
-  };
 }

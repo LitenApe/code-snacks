@@ -1,9 +1,9 @@
+import { CMS } from '~/service/cms';
+import { DangerousHTML } from '~/components/DangerousHTML';
 import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
-import { useLoaderData } from 'remix';
-import { CMS } from '~/service/cms';
 import { PostDTO } from '~/service/cms/domain';
-import { DangerousHTML } from '~/components/DangerousHTML';
+import { useLoaderData } from 'remix';
 
 interface Data {
   post: PostDTO;
@@ -14,9 +14,10 @@ export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
   const logger = new Log('Draft Post');
   const cms = new CMS();
 
+  // eslint-disable-next-line operator-linebreak
   const postId =
     typeof params.slug !== 'undefined'
-      ? Number.parseInt(params.slug)
+      ? Number.parseInt(params.slug, 10)
       : Number.NaN;
 
   if (Number.isNaN(postId)) {

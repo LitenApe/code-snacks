@@ -9,7 +9,7 @@ export const auth = createCookie('auth', {
 
 export async function getCookie<T = any>(
   request: Request,
-  cookie: Cookie
+  cookie: Cookie,
 ): Promise<T> {
   const httpCookie = request.headers.get('Cookie');
   const parsedCookie = (await cookie.parse(httpCookie)) || {};

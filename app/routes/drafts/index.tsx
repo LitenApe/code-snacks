@@ -1,7 +1,7 @@
+import { useLoaderData } from 'remix';
 import { ArticleOverview } from '~/features/ArticleOverview';
 import { CMS } from '~/service/cms';
 import { PostDTO } from '~/service/cms/domain';
-import { useLoaderData } from 'remix';
 
 type Data = Array<PostDTO>;
 

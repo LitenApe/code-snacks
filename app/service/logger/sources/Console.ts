@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Logger } from '../domain';
 
 export class Console implements Logger {

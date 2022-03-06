@@ -1,7 +1,7 @@
+import { PropsWithChildren } from 'react';
 import { Footer } from '../components/layout/Footer';
 import { Main } from '../components/layout/Main';
 import { Navigation } from '../components/layout/Navigation';
-import { PropsWithChildren } from 'react';
 import { SkipLinks } from '../components/SkipLinks';
 
 interface Props {

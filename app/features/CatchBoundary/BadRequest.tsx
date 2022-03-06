@@ -8,8 +8,8 @@ export function BadRequest(): JSX.Element {
         manually modifying the url.
       </p>
       <p>
-        Please don't attempt to do any monkey business here, that job is already
-        occupied by the the developer of this website.
+        Please don&apos;t attempt to do any monkey business here, that job is
+        already occupied by the the developer of this website.
       </p>
     </>
   );

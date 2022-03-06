@@ -7,6 +7,8 @@ interface Props {
 }
 
 export function Navigation(props: Props): JSX.Element {
+  const { isAuthenticated } = props;
+
   return (
     <nav id={Landmarks.NAVBAR} tabIndex={-1}>
       <ul>
@@ -25,14 +27,14 @@ export function Navigation(props: Props): JSX.Element {
             Drafts
           </Link>
         </li>
-        {!props.isAuthenticated && (
+        {!isAuthenticated && (
           <li>
             <Link prefetch="intent" to={Routes.SIGNIN}>
               Sign In
             </Link>
           </li>
         )}
-        {props.isAuthenticated && (
+        {isAuthenticated && (
           <li>
             <Link prefetch="intent" to={Routes.SIGNOUT}>
               Sign Out

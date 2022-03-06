@@ -8,16 +8,14 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from 'remix';
+import type { MetaFunction } from 'remix';
 import { auth, getCookie } from './lib/cookie';
 
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
 import { Layout } from './features/Layout';
-import type { MetaFunction } from 'remix';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 
-export const meta: MetaFunction = () => {
-  return { title: 'New Remix App' };
-};
+export const meta: MetaFunction = () => ({ title: 'New Remix App' });
 
 export const loader: LoaderFunction = async ({ request }) => {
   const cookie = await getCookie(request, auth);

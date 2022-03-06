@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface Logger {
   debug: (...args: Array<unknown>) => void;
   info: (...args: Array<unknown>) => void;
