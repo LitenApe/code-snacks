@@ -6,7 +6,6 @@ export const auth = createCookie('auth', {
   maxAge: 604_800,
   sameSite: 'strict',
   secrets: [process.env.COOKIE_SECRET as string],
-  secure: true,
   httpOnly: true,
 });
 

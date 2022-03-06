@@ -1,13 +1,11 @@
 import { Landmarks } from '~/lib/landmarks';
 import { Link } from 'remix';
 import { Routes } from '~/lib/routes';
+import { useRootData } from '~/features/RootDataContext/RootDataContext';
 
-interface Props {
-  readonly isAuthenticated: boolean;
-}
-
-export function Navigation(props: Props): JSX.Element {
-  const { isAuthenticated } = props;
+export function Navigation(): JSX.Element {
+  const rootData = useRootData();
+  const { isAuthenticated } = rootData;
 
   return (
     <nav id={Landmarks.NAVBAR} tabIndex={-1}>

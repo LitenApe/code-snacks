@@ -8,25 +8,30 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from 'remix';
-import type { MetaFunction } from 'remix';
 import { auth, getCookie } from './lib/cookie';
 
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
 import { Layout } from './features/Layout';
+import type { MetaFunction } from 'remix';
+import { RootDataProvider } from './features/RootDataContext/RootDataContext';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 
-export const meta: MetaFunction = () => ({ title: 'New Remix App' });
+interface Data {
+  readonly authCookie: Record<string, any>;
+}
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
+
+export const loader: LoaderFunction = async ({ request }): Promise<Data> => {
   const cookie = await getCookie(request, auth);
-
   return {
-    isAuthenticated: cookie.authorization === true,
+    authCookie: cookie,
   };
 };
 
 export default function App(): JSX.Element {
-  const data = useLoaderData();
+  const data = useLoaderData<Data>();
+  const { authCookie } = data;
 
   return (
     <html lang="en">
@@ -37,9 +42,11 @@ export default function App(): JSX.Element {
         <Links />
       </head>
       <body>
-        <Layout isAuthenticated={data.isAuthenticated}>
-          <Outlet />
-        </Layout>
+        <RootDataProvider authCookie={authCookie}>
+          <Layout>
+            <Outlet />
+          </Layout>
+        </RootDataProvider>
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
@@ -48,5 +55,26 @@ export default function App(): JSX.Element {
   );
 }
 
-export const CatchBoundary = KnownExceptionBoundary;
-export const ErrorBoundary = UnknownExceptionBoundary;
+export function CatchBoundary() {
+  const data = useLoaderData<Data>();
+  const { authCookie } = data;
+
+  return (
+    <RootDataProvider authCookie={authCookie}>
+      <KnownExceptionBoundary />
+    </RootDataProvider>
+  );
+}
+
+export function ErrorBoundary(props: { error: Error }) {
+  const { error } = props;
+
+  const data = useLoaderData<Data>();
+  const { authCookie } = data;
+
+  return (
+    <RootDataProvider authCookie={authCookie}>
+      <UnknownExceptionBoundary error={error} />
+    </RootDataProvider>
+  );
+}
