@@ -15,6 +15,11 @@ import {
 import { Log } from '../logger';
 import { marked } from 'marked';
 
+interface Options {
+  readonly isAuthenticated?: boolean;
+}
+
+const memoryCache = new InMemoryCache();
 export class CMS {
   #client;
 
@@ -22,11 +27,11 @@ export class CMS {
 
   #parser;
 
-  constructor(options: Record<string, unknown> = {}) {
+  constructor(options: Options = {}) {
     this.#logger = new Log('CMS');
     this.#client = new ApolloClient({
       uri: process.env.STRAPI_URL,
-      cache: new InMemoryCache(),
+      cache: memoryCache,
       ssrMode: true,
       headers: options.isAuthenticated
         ? {

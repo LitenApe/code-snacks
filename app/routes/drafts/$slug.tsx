@@ -12,7 +12,9 @@ interface Data {
 
 export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
   const logger = new Log('Draft Post');
-  const cms = new CMS();
+  const cms = new CMS({
+    isAuthenticated: true,
+  });
 
   // eslint-disable-next-line operator-linebreak
   const postId =
