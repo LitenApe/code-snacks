@@ -38,11 +38,11 @@ export const action: ActionFunction = async ({
   const cms = new CMS({ isAuthenticated: true });
 
   try {
-    const res = (await cms.createPost({
-      title,
-      content,
+    const res = await cms.createPost({
+      title: title as string,
+      content: content as string,
       publishedAt: isDefined(published) ? new Date().toISOString() : null,
-    })) as any;
+    });
 
     return redirect(
       `${isDefined(published) ? Routes.ARCHIVE : Routes.DRAFTS}/${res.id}`,

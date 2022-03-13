@@ -48,7 +48,7 @@ export class CMS {
     });
   }
 
-  async createPost(payload: any): Promise<unknown> {
+  async createPost(payload: Partial<PostDTO>): Promise<PostDTO> {
     this.#logger.debug(`Creating a new post with [title=${payload.title}]`);
     try {
       const res = await this.#client.mutate({
