@@ -1,7 +1,7 @@
 import { Landmarks } from '~/lib/landmarks';
 import { Link } from 'remix';
 import { Routes } from '~/lib/routes';
-import { useRootData } from '~/features/RootDataContext/RootDataContext';
+import { useRootData } from '~/features/RootDataContext';
 
 const authenticatedRoutes = [
   {
@@ -22,8 +22,7 @@ const unauthenticatedRoutes = [
 ];
 
 export function Navigation(): JSX.Element {
-  const rootData = useRootData();
-  const { isAuthenticated } = rootData;
+  const { isAuthenticated } = useRootData();
 
   const additionalRoutes = isAuthenticated
     ? authenticatedRoutes

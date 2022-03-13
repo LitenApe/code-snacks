@@ -13,11 +13,11 @@ import { auth, getCookie } from './lib/cookie';
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
 import { Layout } from './features/Layout';
 import type { MetaFunction } from 'remix';
-import { RootDataProvider } from './features/RootDataContext/RootDataContext';
+import { RootDataProvider } from './features/RootDataContext';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 
 interface Data {
-  readonly authCookie: Record<string, any>;
+  readonly authCookie: Record<string, unknown>;
 }
 
 export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
