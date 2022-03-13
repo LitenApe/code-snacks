@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloError, InMemoryCache } from '@apollo/client';
 import {
   Post, PostDTO, Posts, Tags,
 } from './domain';
@@ -69,9 +69,15 @@ export class CMS {
         ...res.data.createPost.data.attributes,
       };
     } catch (err) {
-      this.#logger.error(
-        `Failed to create new post with [title=${payload.title}]`,
-      );
+      if (err instanceof ApolloError) {
+        this.#logger.error(
+          `Failed to create a new post with [title=${payload.title}]. Server responded with [message=${err.message}]`,
+        );
+      } else {
+        this.#logger.error(
+          `Failed to create new post with [title=${payload.title}]`,
+        );
+      }
       throw err;
     }
   }
