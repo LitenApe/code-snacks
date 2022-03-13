@@ -56,11 +56,8 @@ export default function App(): JSX.Element {
 }
 
 export function CatchBoundary() {
-  const data = useLoaderData<Data>();
-  const { authCookie } = data;
-
   return (
-    <RootDataProvider authCookie={authCookie}>
+    <RootDataProvider authCookie={{ authCookie: {} }}>
       <KnownExceptionBoundary />
     </RootDataProvider>
   );
@@ -69,11 +66,8 @@ export function CatchBoundary() {
 export function ErrorBoundary(props: { error: Error }) {
   const { error } = props;
 
-  const data = useLoaderData<Data>();
-  const { authCookie } = data;
-
   return (
-    <RootDataProvider authCookie={authCookie}>
+    <RootDataProvider authCookie={{ authCookie: {} }}>
       <UnknownExceptionBoundary error={error} />
     </RootDataProvider>
   );

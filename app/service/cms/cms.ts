@@ -5,6 +5,7 @@ import {
   Post, PostDTO, Posts, Tags,
 } from './domain';
 import {
+  createPost as createPostMutation,
   draft as draftQuery,
   drafts as draftsQuery,
   post as postQuery,
@@ -45,6 +46,34 @@ export class CMS {
       gfm: true,
       headerIds: true,
     });
+  }
+
+  async createPost(payload: any): Promise<unknown> {
+    this.#logger.debug(`Creating a new post with [title=${payload.title}]`);
+    try {
+      const res = await this.#client.mutate({
+        mutation: createPostMutation,
+        variables: {
+          data: {
+            ...payload,
+            tags: [],
+          },
+        },
+      });
+
+      this.#logger.info(
+        `Created new post with [id=${res.data.createPost.data.id}]`,
+      );
+      return {
+        id: res.data.createPost.data.id,
+        ...res.data.createPost.data.attributes,
+      };
+    } catch (err) {
+      this.#logger.error(
+        `Failed to create new post with [title=${payload.title}]`,
+      );
+      throw err;
+    }
   }
 
   async getPost(

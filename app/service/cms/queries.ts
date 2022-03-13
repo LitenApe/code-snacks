@@ -91,15 +91,15 @@ export const tags = gql`
   }
 `;
 
-// eslint-disable-next-line no-unused-vars
-const postPost = gql`
+export const createPost = gql`
   ${postFragment}
   mutation ($data: PostInput!) {
-    createPost(data: $datat) {
+    createPost(data: $data) {
       data {
         id
         attributes {
           ...CorePostFields
+          publishedAt
         }
       }
     }
