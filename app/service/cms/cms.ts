@@ -85,6 +85,7 @@ export class CMS {
   async getPost(
     id: number,
     preview: boolean = false,
+    raw: boolean = false,
   ): Promise<PostDTO | undefined> {
     this.#logger.debug(`Retrieving post [id=${id}]`);
     const res = await this.#client.query<Post>({
@@ -113,7 +114,9 @@ export class CMS {
     return {
       id: data.id,
       ...data.attributes,
-      content: this.#parser(data.attributes.content),
+      content: raw
+        ? data.attributes.content
+        : this.#parser(data.attributes.content),
     };
   }
 

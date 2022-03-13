@@ -2,7 +2,7 @@ import { CMS } from '~/service/cms';
 import { DangerousHTML } from '~/components/DangerousHTML';
 import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
-import { PostDTO } from '~/service/cms/domain';
+import type { PostDTO } from '~/service/cms/domain';
 import { useLoaderData } from 'remix';
 
 interface Data {

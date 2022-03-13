@@ -64,10 +64,7 @@ export const drafts = gql`
 export const draft = gql`
   ${postFragment}
   query ($id: ID!) {
-    posts(
-      publicationState: PREVIEW
-      filters: { id: { eq: $id }, publishedAt: null }
-    ) {
+    posts(publicationState: PREVIEW, filters: { id: { eq: $id } }) {
       data {
         id
         attributes {
