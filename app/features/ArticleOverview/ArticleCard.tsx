@@ -29,7 +29,7 @@ export function ArticleCard(props: Props): JSX.Element {
       <p>
         <time dateTime={timestamp}>{timestamp}</time>
       </p>
-      {isAuthenticated && <Link to={`${Routes.DRAFTS}/${id}`}>Edit</Link>}
+      {isAuthenticated && <Link to={`${Routes.DRAFTS}/${id}/edit`}>Edit</Link>}
     </article>
   );
 }

@@ -1,9 +1,11 @@
+import { Link, LoaderFunction, useLoaderData } from 'remix';
+
 import { CMS } from '~/service/cms';
 import { DangerousHTML } from '~/components/DangerousHTML';
-import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
 import type { PostDTO } from '~/service/cms/domain';
-import { useLoaderData } from 'remix';
+import { Routes } from '~/lib/routes';
+import { useRootData } from '~/features/RootDataContext';
 
 interface Data {
   post: PostDTO;
@@ -41,12 +43,15 @@ export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
 };
 
 export default function Draft(): JSX.Element {
-  const data = useLoaderData<Data>();
+  const { post } = useLoaderData<Data>();
+  const { id, title, content } = post;
+  const { isAuthenticated } = useRootData();
 
   return (
     <>
-      <h1>{data.post.title}</h1>
-      <DangerousHTML content={data.post.content} />
+      {isAuthenticated && <Link to={`${Routes.DRAFTS}/${id}/edit`}>Edit</Link>}
+      <h1>{title}</h1>
+      <DangerousHTML content={content} />
     </>
   );
 }
