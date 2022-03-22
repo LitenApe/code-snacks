@@ -11,6 +11,7 @@ import {
   post as postQuery,
   posts as postsQuery,
   tags as tagsQuery,
+  updatePost as updatePostMutation,
 } from './queries';
 
 import { Log } from '../logger';
@@ -77,6 +78,27 @@ export class CMS {
         this.#logger.error(
           `Failed to create new post with [title=${payload.title}]`,
         );
+      }
+      throw err;
+    }
+  }
+
+  async updatePost(payload: PostDTO): Promise<any> {
+    const { id, ...data } = payload;
+    this.#logger.debug(`Updating post with [id=${id}]`);
+    try {
+      await this.#client.mutate({
+        mutation: updatePostMutation,
+        variables: {
+          id,
+          data,
+        },
+      });
+    } catch (err) {
+      if (err instanceof ApolloError) {
+        this.#logger.error(`Failed to update post with [id=${id}]`);
+      } else {
+        this.#logger.error(`Failed to update post with [id=${id}]`);
       }
       throw err;
     }

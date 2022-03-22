@@ -1,9 +1,9 @@
-import { ArticleAction } from './ArticleActions';
 import { Heading } from '~/components/layout/Heading';
 import { Link } from 'remix';
 import { PostDTO } from '~/service/cms/domain';
 import { Routes } from '~/lib/routes';
 import { isDefined } from '~/lib/isDefined';
+import { useRootData } from '../RootDataContext';
 
 interface Props {
   readonly post: PostDTO;
@@ -15,6 +15,7 @@ export function ArticleCard(props: Props): JSX.Element {
   const {
     id, title, publishedAt, createdAt,
   } = post;
+  const { isAuthenticated } = useRootData();
 
   const isDraft = !isDefined(publishedAt);
   const timestamp = isDraft ? createdAt : publishedAt;
@@ -28,7 +29,7 @@ export function ArticleCard(props: Props): JSX.Element {
       <p>
         <time dateTime={timestamp}>{timestamp}</time>
       </p>
-      <ArticleAction post={post} />
+      {isAuthenticated && <Link to={`${Routes.DRAFTS}/${id}`}>Edit</Link>}
     </article>
   );
 }

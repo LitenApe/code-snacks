@@ -103,8 +103,7 @@ export const createPost = gql`
   }
 `;
 
-// eslint-disable-next-line no-unused-vars
-const putPost = gql`
+export const updatePost = gql`
   ${postFragment}
   mutation ($id: ID!, $data: PostInput!) {
     updatePost(id: $id, data: $data) {
