@@ -9,6 +9,10 @@ const authenticatedRoutes = [
     label: 'Drafts',
   },
   {
+    uri: `${Routes.DRAFTS}/create`,
+    label: 'Create post',
+  },
+  {
     uri: Routes.SIGNOUT,
     label: 'Sign Out',
   },
