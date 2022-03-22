@@ -1,14 +1,23 @@
-import { Form, useLoaderData } from 'remix';
+import {
+  ActionFunction, Form, redirect, useLoaderData,
+} from 'remix';
 
 import { CMS } from '~/service/cms';
 import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
 import type { PostDTO } from '~/service/cms/domain';
+import { Routes } from '~/lib/routes';
 import { isDefined } from '~/lib/isDefined';
 
 interface Data {
   post: PostDTO;
   id: number;
+}
+
+interface ErrorResponse {
+  id?: string;
+  title?: string;
+  content?: string;
 }
 
 export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
@@ -41,6 +50,55 @@ export const loader: LoaderFunction = async ({ params }): Promise<Data> => {
   };
 };
 
+export const action: ActionFunction = async ({
+  request,
+}): Promise<ErrorResponse | ReturnType<typeof redirect>> => {
+  if (request.method !== 'POST') {
+    throw new Response('Method not allowed', { status: 405 });
+  }
+
+  const payload = await request.formData();
+  const id = payload.get('id');
+  const title = payload.get('title');
+  const content = payload.get('content');
+  const publishedAt = payload.get('publishedAt');
+
+  if (!isDefined(title) || !isDefined(content) || !isDefined(id)) {
+    const errors: ErrorResponse = {};
+
+    if (!isDefined(id)) {
+      errors.id = 'id is required';
+    }
+
+    if (!isDefined(title)) {
+      errors.title = 'title is required';
+    }
+
+    if (!isDefined(content)) {
+      errors.content = 'content is required';
+    }
+
+    return errors;
+  }
+
+  const cms = new CMS({ isAuthenticated: true });
+
+  try {
+    const res = await cms.updatePost({
+      id: id as string,
+      title: title as string,
+      content: content as string,
+      publishedAt: isDefined(publishedAt) ? new Date().toISOString() : null,
+    });
+
+    return redirect(
+      `${isDefined(publishedAt) ? Routes.ARCHIVE : Routes.DRAFTS}/${res.id}`,
+    );
+  } catch {
+    return {};
+  }
+};
+
 export default function Draft(): JSX.Element {
   const { id, post } = useLoaderData<Data>();
 
@@ -48,6 +106,8 @@ export default function Draft(): JSX.Element {
     <>
       <h1>Edit post: {id}</h1>
       <Form method="post">
+        <input type="hidden" name="id" defaultValue={id} />
+
         <label htmlFor="title">
           Title
           <input
@@ -71,8 +131,8 @@ export default function Draft(): JSX.Element {
         <label htmlFor="published">
           <input
             type="checkbox"
-            id="published"
-            name="published"
+            id="publishedAt"
+            name="publishedAt"
             defaultChecked={isDefined(post.publishedAt)}
           />
           Published

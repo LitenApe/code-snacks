@@ -25,11 +25,11 @@ export const action: ActionFunction = async ({
     const errors: ErrorResponse = {};
 
     if (!isDefined(title)) {
-      errors.title = 'Title is required';
+      errors.title = 'title is required';
     }
 
     if (!isDefined(content)) {
-      errors.content = 'Content is required';
+      errors.content = 'content is required';
     }
 
     return errors;

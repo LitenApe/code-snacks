@@ -111,6 +111,7 @@ export const updatePost = gql`
         id
         attributes {
           ...CorePostFields
+          publishedAt
         }
       }
     }

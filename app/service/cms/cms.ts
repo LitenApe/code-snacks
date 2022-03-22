@@ -68,6 +68,7 @@ export class CMS {
       return {
         id: res.data.createPost.data.id,
         ...res.data.createPost.data.attributes,
+        tags: [],
       };
     } catch (err) {
       if (err instanceof ApolloError) {
@@ -83,7 +84,7 @@ export class CMS {
     }
   }
 
-  async updatePost(payload: PostDTO): Promise<any> {
+  async updatePost(payload: Partial<PostDTO>): Promise<any> {
     const { id, ...data } = payload;
     this.#logger.debug(`Updating post with [id=${id}]`);
     try {
@@ -96,7 +97,9 @@ export class CMS {
       });
     } catch (err) {
       if (err instanceof ApolloError) {
-        this.#logger.error(`Failed to update post with [id=${id}]`);
+        this.#logger.error(
+          `Failed to update post with [id=${id}]. Server responded with [message=${err.message}]`,
+        );
       } else {
         this.#logger.error(`Failed to update post with [id=${id}]`);
       }
