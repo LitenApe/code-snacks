@@ -1,4 +1,4 @@
-import { Landmarks } from '~/lib/landmarks';
+import { Landmarks } from './landmarks';
 import { Link } from '@remix-run/react';
 
 export function Navigation(): JSX.Element {

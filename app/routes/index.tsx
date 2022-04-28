@@ -1,4 +1,4 @@
-import { CMS } from '~/service/cms';
+import { CMS } from '~/services';
 import { useLoaderData } from '@remix-run/react';
 
 type Data = Array<any>;

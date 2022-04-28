@@ -1,8 +1,8 @@
-import { Footer } from '../components/layout/Footer';
-import { Main } from '../components/layout/Main';
-import { Navigation } from '../components/layout/Navigation';
+import { Footer } from './Footer';
+import { Main } from './Main';
+import { Navigation } from './Navigation';
 import { PropsWithChildren } from 'react';
-import { SkipLinks } from '../components/SkipLinks';
+import { SkipLinks } from './SkipLinks';
 
 export function Layout(props: PropsWithChildren<{}>): JSX.Element {
   const { children } = props;

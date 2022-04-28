@@ -1,4 +1,4 @@
-import { Landmarks } from '~/lib/landmarks';
+import { Landmarks } from './landmarks';
 import { PropsWithChildren } from 'react';
 
 export function Main(props: PropsWithChildren<unknown>): JSX.Element {

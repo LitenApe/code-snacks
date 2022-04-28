@@ -1,6 +1,6 @@
 import { BadRequest } from './BadRequest';
 import { Layout } from '../Layout';
-import { Log } from '~/service/logger';
+import { Logger } from '~/services';
 import { NotFound } from './NotFound';
 import { Unauthorized } from './Unauthorized';
 import { useCatch } from '@remix-run/react';
@@ -19,7 +19,7 @@ function getExceptionMessage(status: number): JSX.Element {
 }
 
 export function Multiplexer(): JSX.Element {
-  const logger = new Log('CatchBoundary');
+  const logger = new Logger('CatchBoundary');
   const caught = useCatch();
   const children = getExceptionMessage(caught.status);
   logger.error(`[status=${caught.status}]`, `[data=${caught.data}]`);

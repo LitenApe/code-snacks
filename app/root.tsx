@@ -1,4 +1,9 @@
 import {
+  CatchBoundary as KnownExceptionBoundary,
+  Layout,
+  ErrorBoundary as UnknownExceptionBoundary,
+} from '~/features';
+import {
   Links,
   LiveReload,
   Meta,
@@ -7,10 +12,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 
-import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
-import { Layout } from './features/Layout';
 import type { MetaFunction } from '@remix-run/node';
-import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 
 export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
 

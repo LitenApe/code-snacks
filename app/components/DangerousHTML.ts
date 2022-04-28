@@ -1,15 +1,21 @@
-import * as React from 'react';
+import {
+  ComponentPropsWithRef,
+  ForwardedRef,
+  createElement,
+  forwardRef,
+} from 'react';
 
-interface Props {
+type Props = {
   readonly content: string;
-}
+} & ComponentPropsWithRef<'div'>;
 
-export function DangerousHTML(
-  props: Props & React.ComponentPropsWithoutRef<'div'>,
-): JSX.Element {
-  const { content, ...rest } = props;
-  return React.createElement('div', {
-    ...rest,
-    dangerouslySetInnerHTML: { __html: content },
-  });
-}
+export const DangerousHTML = forwardRef<HTMLDivElement, Props>(
+  (props: Props, ref: ForwardedRef<HTMLDivElement>): JSX.Element => {
+    const { content, ...rest } = props;
+    return createElement('div', {
+      ...rest,
+      ref,
+      dangerouslySetInnerHTML: { __html: content },
+    });
+  },
+);

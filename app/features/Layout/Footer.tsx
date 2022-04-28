@@ -1,4 +1,4 @@
-import { Landmarks } from '~/lib/landmarks';
+import { Landmarks } from './landmarks';
 
 export function Footer(): JSX.Element {
   return (
