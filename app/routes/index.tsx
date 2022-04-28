@@ -1,14 +1,11 @@
-import { useLoaderData } from "@remix-run/react";
-import { ArticleOverview } from '~/features/ArticleOverview';
 import { CMS } from '~/service/cms';
-import { PostDTO } from '~/service/cms/domain';
+import { useLoaderData } from '@remix-run/react';
 
-type Data = Array<PostDTO>;
+type Data = Array<any>;
 
 export async function loader(): Promise<Data> {
-  const cms = new CMS();
-  const posts = await cms.getPosts();
-  return posts.slice(0, 10);
+  const posts = await CMS.getPosts();
+  return posts;
 }
 
 export default function Index(): JSX.Element {
@@ -18,7 +15,7 @@ export default function Index(): JSX.Element {
     <>
       <h1>Tech Snacks</h1>
       <h2>Recent posts</h2>
-      <ArticleOverview posts={data} />
+      {JSON.stringify(data)}
     </>
   );
 }

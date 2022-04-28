@@ -1,1 +1,1 @@
-export { CMS } from './cms';
+export { instance as CMS } from './cms';

@@ -3,7 +3,7 @@ import { Layout } from '../Layout';
 import { Log } from '~/service/logger';
 import { NotFound } from './NotFound';
 import { Unauthorized } from './Unauthorized';
-import { useCatch } from "@remix-run/react";
+import { useCatch } from '@remix-run/react';
 
 function getExceptionMessage(status: number): JSX.Element {
   switch (status) {

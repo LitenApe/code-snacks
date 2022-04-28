@@ -1,57 +1,15 @@
 import { Landmarks } from '~/lib/landmarks';
-import { Link } from "@remix-run/react";
-import { Routes } from '~/lib/routes';
-import { useRootData } from '~/features/RootDataContext';
-
-const authenticatedRoutes = [
-  {
-    uri: Routes.DRAFTS,
-    label: 'Drafts',
-  },
-  {
-    uri: `${Routes.DRAFTS}/create`,
-    label: 'Create post',
-  },
-  {
-    uri: Routes.SIGNOUT,
-    label: 'Sign Out',
-  },
-];
-
-const unauthenticatedRoutes = [
-  {
-    uri: Routes.SIGNIN,
-    label: 'Sign In',
-  },
-];
+import { Link } from '@remix-run/react';
 
 export function Navigation(): JSX.Element {
-  const { isAuthenticated } = useRootData();
-
-  const additionalRoutes = isAuthenticated
-    ? authenticatedRoutes
-    : unauthenticatedRoutes;
-
   return (
     <nav id={Landmarks.NAVBAR} tabIndex={-1}>
       <ul>
         <li>
-          <Link prefetch="intent" to={Routes.HOME}>
+          <Link prefetch="intent" to="/">
             Home
           </Link>
         </li>
-        <li>
-          <Link prefetch="intent" to={Routes.ARCHIVE}>
-            Archive
-          </Link>
-        </li>
-        {additionalRoutes.map(({ uri, label }) => (
-          <li key={`navigation-route-${isAuthenticated}-${uri}`}>
-            <Link prefetch="intent" to={uri}>
-              {label}
-            </Link>
-          </li>
-        ))}
       </ul>
     </nav>
   );
