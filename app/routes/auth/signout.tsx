@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from 'remix';
+import { LoaderFunction, redirect } from "@remix-run/node";
 import { auth, getCookie } from '~/lib/cookie';
 
 import { Routes } from '~/lib/routes';

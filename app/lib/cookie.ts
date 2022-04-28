@@ -1,5 +1,5 @@
-import type { Cookie } from 'remix';
-import { createCookie } from 'remix';
+import type { Cookie } from "@remix-run/node";
+import { createCookie } from "@remix-run/node";
 
 export const auth = createCookie('auth', {
   path: '/',

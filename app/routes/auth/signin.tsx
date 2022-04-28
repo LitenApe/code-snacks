@@ -1,8 +1,10 @@
 // eslint-disable-next-line object-curly-newline
-import { Form, redirect, useActionData } from 'remix';
+import type { ActionFunction } from "@remix-run/node";
+
+import { redirect } from "@remix-run/node";
+import { Form, useActionData } from "@remix-run/react";
 import { auth, getCookie } from '~/lib/cookie';
 
-import type { ActionFunction } from 'remix';
 import { Routes } from '~/lib/routes';
 
 interface ErrorResponse {

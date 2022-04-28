@@ -1,4 +1,4 @@
-import { useLoaderData } from 'remix';
+import { useLoaderData } from "@remix-run/react";
 import { ArticleOverview } from '~/features/ArticleOverview';
 import { CMS } from '~/service/cms';
 import { PostDTO } from '~/service/cms/domain';

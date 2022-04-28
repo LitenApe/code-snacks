@@ -1,5 +1,5 @@
 import { Heading } from '~/components/layout/Heading';
-import { Link } from 'remix';
+import { Link } from "@remix-run/react";
 import { PostDTO } from '~/service/cms/domain';
 import { Routes } from '~/lib/routes';
 import { isDefined } from '~/lib/isDefined';

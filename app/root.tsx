@@ -1,18 +1,10 @@
-import {
-  Links,
-  LiveReload,
-  LoaderFunction,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLoaderData,
-} from 'remix';
+import type { MetaFunction } from "@remix-run/node";
+import { LoaderFunction } from "@remix-run/node";
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData } from "@remix-run/react";
 import { auth, getCookie } from './lib/cookie';
 
 import { CatchBoundary as KnownExceptionBoundary } from './features/CatchBoundary';
 import { Layout } from './features/Layout';
-import type { MetaFunction } from 'remix';
 import { RootDataProvider } from './features/RootDataContext';
 import { ErrorBoundary as UnknownExceptionBoundary } from './features/ErrorBoundary';
 

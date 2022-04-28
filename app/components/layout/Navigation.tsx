@@ -1,5 +1,5 @@
 import { Landmarks } from '~/lib/landmarks';
-import { Link } from 'remix';
+import { Link } from "@remix-run/react";
 import { Routes } from '~/lib/routes';
 import { useRootData } from '~/features/RootDataContext';
 

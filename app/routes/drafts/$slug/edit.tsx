@@ -1,9 +1,8 @@
-import {
-  ActionFunction, Form, redirect, useLoaderData,
-} from 'remix';
+import type { LoaderFunction } from "@remix-run/node";
+import { ActionFunction, redirect } from "@remix-run/node";
+import { Form, useLoaderData } from "@remix-run/react";
 
 import { CMS } from '~/service/cms';
-import type { LoaderFunction } from 'remix';
 import { Log } from '~/service/logger';
 import type { PostDTO } from '~/service/cms/domain';
 import { Routes } from '~/lib/routes';

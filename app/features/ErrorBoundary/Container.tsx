@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
-import type { ErrorBoundaryComponent } from 'remix';
+import type { ErrorBoundaryComponent } from "@remix-run/node";
+
 import { InternalServerError } from './InternalServerError';
 import { Layout } from '../Layout';
 import { Log } from '~/service/logger';

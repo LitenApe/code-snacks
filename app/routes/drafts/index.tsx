@@ -1,7 +1,7 @@
 import { ArticleOverview } from '~/features/ArticleOverview';
 import { CMS } from '~/service/cms';
 import { PostDTO } from '~/service/cms/domain';
-import { useLoaderData } from 'remix';
+import { useLoaderData } from "@remix-run/react";
 
 type Data = Array<PostDTO>;
 

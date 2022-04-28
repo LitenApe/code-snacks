@@ -1,4 +1,5 @@
-import { Link, LoaderFunction, useLoaderData } from 'remix';
+import { LoaderFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
 import { CMS } from '~/service/cms';
 import { DangerousHTML } from '~/components/DangerousHTML';

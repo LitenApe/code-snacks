@@ -1,4 +1,5 @@
-import { ActionFunction, Form, redirect } from 'remix';
+import { ActionFunction, redirect } from "@remix-run/node";
+import { Form } from "@remix-run/react";
 
 import { CMS } from '~/service/cms';
 import { Routes } from '~/lib/routes';
