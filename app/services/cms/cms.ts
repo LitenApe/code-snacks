@@ -1,10 +1,10 @@
-import { Log } from '../logger';
+import { Logger } from '../logger';
 
 class CMS {
   #logger;
 
   constructor() {
-    this.#logger = new Log('CMS');
+    this.#logger = new Logger('CMS');
   }
 
   async getPosts(): Promise<Array<any>> {

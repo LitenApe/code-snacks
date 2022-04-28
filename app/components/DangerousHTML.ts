@@ -1,9 +1,5 @@
-import {
-  ComponentPropsWithRef,
-  ForwardedRef,
-  createElement,
-  forwardRef,
-} from 'react';
+import type { ComponentPropsWithRef, ForwardedRef } from 'react';
+import { createElement, forwardRef } from 'react';
 
 type Props = {
   readonly content: string;

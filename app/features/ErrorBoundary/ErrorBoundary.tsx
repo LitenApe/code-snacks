@@ -1,11 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/function-component-definition */
-import type { ErrorBoundaryComponent } from '@remix-run/node';
 import { InternalServerError } from './InternalServerError';
 import { Layout } from '../Layout';
 import { Logger } from '~/services';
 
-export const Container: ErrorBoundaryComponent = (props): JSX.Element => {
+export function ErrorBoundary(props: { error: Error }): JSX.Element {
   const { error } = props;
   const { message, stack } = error;
   const logger = new Logger('ErrorBoundary');
@@ -15,4 +12,4 @@ export const Container: ErrorBoundaryComponent = (props): JSX.Element => {
       <InternalServerError />
     </Layout>
   );
-};
+}

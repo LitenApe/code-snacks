@@ -1,1 +1,1 @@
-export { Container as ErrorBoundary } from './Container';
+export { ErrorBoundary } from './ErrorBoundary';

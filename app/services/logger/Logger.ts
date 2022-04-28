@@ -1,6 +1,6 @@
 import { Console, Fake } from './sources';
 
-import { Logger } from './domain';
+import type { Logger } from './domain';
 
 export class Log implements Logger {
   #name: string;

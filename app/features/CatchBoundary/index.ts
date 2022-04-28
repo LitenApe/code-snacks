@@ -1,1 +1,1 @@
-export { Multiplexer as CatchBoundary } from './Multiplexer';
+export { CatchBoundary } from './CatchBoudary';
