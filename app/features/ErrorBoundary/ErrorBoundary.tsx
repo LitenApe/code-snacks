@@ -1,6 +1,6 @@
 import { InternalServerError } from './InternalServerError';
 import { Layout } from '../Layout';
-import { Logger } from '~/services';
+import { Logger } from '~/services/logger';
 
 export function ErrorBoundary(props: { error: Error }): JSX.Element {
   const { error } = props;

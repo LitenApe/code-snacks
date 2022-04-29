@@ -1,6 +1,6 @@
 import { BadRequest } from './BadRequest';
 import { Layout } from '../Layout';
-import { Logger } from '~/services';
+import { Logger } from '~/services/logger';
 import { NotFound } from './NotFound';
 import { Unauthorized } from './Unauthorized';
 import { useCatch } from '@remix-run/react';
