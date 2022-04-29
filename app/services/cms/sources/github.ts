@@ -1,4 +1,4 @@
-import { Source } from '../domain';
+import type { Source } from '../domain';
 
 /**
 const files = `

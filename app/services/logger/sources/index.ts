@@ -1,2 +1,2 @@
-export { instance as Console } from './Console';
-export { instance as Fake } from './Fake';
+export { instance as Console } from './console';
+export { instance as Fake } from './fake';

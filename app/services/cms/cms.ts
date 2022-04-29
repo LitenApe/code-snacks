@@ -1,6 +1,6 @@
 import { GitHub } from './sources';
 import { Logger } from '../logger';
-import { Source } from './domain';
+import type { Source } from './domain';
 
 class CMS implements Source {
   #logger;
