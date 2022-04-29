@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { Logger } from '../domain';
+import type { Logger } from '../domain';
 
 class Fake implements Logger {
   debug(..._args: Array<unknown>): void {}

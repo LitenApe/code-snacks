@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Logger } from '../domain';
+import type { Logger } from '../domain';
 
 class Console implements Logger {
   debug(...args: Array<unknown>): void {

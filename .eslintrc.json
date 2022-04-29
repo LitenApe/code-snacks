@@ -20,27 +20,27 @@
   },
   "plugins": ["react", "@typescript-eslint", "import"],
   "rules": {
-    "react/react-in-jsx-scope": "off",
-    "import/prefer-default-export": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "class-methods-use-this": "off",
     "import/extensions": "off",
     "import/no-internal-modules": [
       "error",
-      {
-        "allow": ["react-dom/*", "~/services", "~/features", "~/components"]
-      }
-    ],
-    "class-methods-use-this": "off",
-    "react/jsx-filename-extension": [
-      "error",
-      {
-        "extensions": [".jsx", ".tsx"]
-      }
+      { "allow": ["react-dom/*", "~/services", "~/features", "~/components"] }
     ],
     "import/order": "off",
-    "react/jsx-props-no-spreading": "off",
-    "react/require-default-props": "off",
+    "import/prefer-default-export": "off",
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^(_|[iI]gnored)", "varsIgnorePattern": "^_" }
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      { "extensions": [".jsx", ".tsx"] }
+    ],
     "react/jsx-one-expression-per-line": "off",
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off"
   },
   "overrides": [
     {
