@@ -25,7 +25,14 @@
     "import/extensions": "off",
     "import/no-internal-modules": [
       "error",
-      { "allow": ["react-dom/*", "~/services", "~/features", "~/components"] }
+      {
+        "allow": [
+          "react-dom/*",
+          "~/services/*",
+          "~/features/*",
+          "~/components/*"
+        ]
+      }
     ],
     "import/order": "off",
     "import/prefer-default-export": "off",
