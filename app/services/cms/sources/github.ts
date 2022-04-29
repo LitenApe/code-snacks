@@ -1,4 +1,7 @@
-export const files = `
+import { Source } from '../domain';
+
+/**
+const files = `
 query {
   repository(owner: "LitenApe", name: "tech-snacks") {
     object(expression: "HEAD:app/content") {
@@ -11,7 +14,7 @@ query {
   }
 }`;
 
-export const file = `
+const file = `
 query {
   repository(owner: "LitenApe", name: "tech-snacks") {
     object(expression: "HEAD:app/content/markdown.md") {
@@ -22,3 +25,18 @@ query {
   }
 }
 `;
+*/
+
+class GitHub implements Source {
+  async getPosts(): Promise<Array<unknown>> {
+    return [];
+  }
+
+  async getPost(id: string): Promise<unknown> {
+    return {
+      id,
+    };
+  }
+}
+
+export const instance = new GitHub();
