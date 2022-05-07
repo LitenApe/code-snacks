@@ -1,5 +1,5 @@
 import { Landmarks } from './landmarks';
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 export function Main(props: PropsWithChildren<unknown>): JSX.Element {
   const { children } = props;
