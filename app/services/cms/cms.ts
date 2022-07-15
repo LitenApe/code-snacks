@@ -7,9 +7,9 @@ class CMS implements Source {
 
   #src;
 
-  constructor() {
+  constructor(src: Source) {
     this.#logger = new Logger('CMS');
-    this.#src = GitHub;
+    this.#src = src;
   }
 
   async getPosts(): Promise<Array<unknown>> {
@@ -23,4 +23,4 @@ class CMS implements Source {
   }
 }
 
-export const instance = new CMS();
+export const instance = new CMS(GitHub);

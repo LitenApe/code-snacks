@@ -1,6 +1,6 @@
-import type { Logger } from '../domain';
+import type { Logg } from '../domain';
 
-class Fake implements Logger {
+class Fake implements Logg {
   debug(..._args: Array<unknown>): void {}
 
   info(..._args: Array<unknown>): void {}

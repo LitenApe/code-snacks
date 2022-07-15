@@ -1,11 +1,11 @@
 import { Console, Fake } from './sources';
 
-import type { Logger } from './domain';
+import type { Logg } from './domain';
 
-export class Log implements Logger {
+export class Logger implements Logg {
   #name: string;
 
-  #src: Logger;
+  #src: Logg;
 
   constructor(name: string) {
     this.#name = name;

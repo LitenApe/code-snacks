@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import type { Logger } from '../domain';
+import type { Logg } from '../domain';
 
-class Console implements Logger {
+class Console implements Logg {
   debug(...args: Array<unknown>): void {
     console.debug(...args);
   }
