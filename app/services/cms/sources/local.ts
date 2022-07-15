@@ -4,6 +4,11 @@ import { Logger } from '~/services/logger';
 import { Source } from '../domain';
 import { join } from 'path';
 
+type RawContent = {
+  name: string;
+  content: string;
+};
+
 class Local implements Source {
   #logger: Logger;
 
@@ -23,7 +28,7 @@ class Local implements Source {
     return allContent;
   }
 
-  private async retrieveAllContent() {
+  private async retrieveAllContent(): Promise<Array<RawContent>> {
     if (this.#content_location === undefined) {
       this.#logger.error(
         'Content locations is undefined, unable to retrieve content',
@@ -51,7 +56,7 @@ class Local implements Source {
     const result = await Promise.all(filecontents);
 
     const nameAndContent = filenames.map((filename, index) => ({
-      name: filename.substring(0, filename.indexOf('.md')),
+      name: filename.substring(0, filename.indexOf('.')),
       content: result[index],
     }));
 
@@ -62,7 +67,7 @@ class Local implements Source {
     return nameAndContent;
   }
 
-  private async retrieveContent(id: string) {
+  private async retrieveContent(id: string): Promise<RawContent | undefined> {
     const allContent = await this.retrieveAllContent();
     const content = allContent.find(({ name }) => name === id);
     return content;
