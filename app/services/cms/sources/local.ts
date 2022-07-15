@@ -7,6 +7,8 @@ import { join } from 'path';
 class Local implements Source {
   #logger: Logger;
 
+  #content_location = process.env.CONTENT_LOCATION;
+
   constructor() {
     this.#logger = new Logger('CMS:Local');
   }
@@ -22,7 +24,16 @@ class Local implements Source {
   }
 
   private async retrieveAllContent() {
-    const location = join(__dirname, '../app/content/posts');
+    if (this.#content_location === undefined) {
+      this.#logger.error(
+        'Content locations is undefined, unable to retrieve content',
+      );
+      throw new Error(
+        'Undefined content location! Make sure that environment variables are loaded into the system correctly',
+      );
+    }
+
+    const location = join(__dirname, '..', this.#content_location);
     const filenames = await readdir(location);
 
     this.#logger.debug(`Retrieved [filenames=(${filenames.join(', ')})]`);
