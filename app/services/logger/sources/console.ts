@@ -10,6 +10,10 @@ class Console implements Logg {
     console.info(...args);
   }
 
+  warn(...args: Array<unknown>): void {
+    console.warn(...args);
+  }
+
   error(...args: Array<unknown>): void {
     console.error(...args);
   }

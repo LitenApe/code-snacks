@@ -5,6 +5,8 @@ class Fake implements Logg {
 
   info(..._args: Array<unknown>): void {}
 
+  warn(..._args: Array<unknown>): void {}
+
   error(..._args: Array<unknown>): void {}
 }
 

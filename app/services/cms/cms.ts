@@ -1,4 +1,5 @@
-import { GitHub } from './sources';
+import { GitHub, Local } from './sources';
+
 import { Logger } from '../logger';
 import type { Source } from './domain';
 
@@ -19,8 +20,17 @@ class CMS implements Source {
 
   async getPost(id: string): Promise<unknown> {
     this.#logger.debug(`Retrieving post with [id=${id}]`);
-    return this.#src.getPost(id);
+
+    const post = this.#src.getPost(id);
+
+    if (post === undefined) {
+      this.#logger.warn(`Unable to retrieve post with [id=${id}]`);
+      return null;
+    }
+
+    return post;
   }
 }
 
-export const instance = new CMS(GitHub);
+const source = process.env.NODE_ENV === 'development' ? Local : GitHub;
+export const instance = new CMS(source);
