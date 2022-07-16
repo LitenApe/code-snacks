@@ -5,7 +5,7 @@ import { Source } from '../domain';
 import { join } from 'path';
 
 type RawContent = {
-  name: string;
+  id: string;
   content: string;
 };
 
@@ -56,7 +56,7 @@ class Local implements Source {
     const result = await Promise.all(filecontents);
 
     const nameAndContent = filenames.map((filename, index) => ({
-      name: filename.substring(0, filename.indexOf('.')),
+      id: filename.substring(0, filename.indexOf('.')),
       content: result[index],
     }));
 
@@ -67,9 +67,11 @@ class Local implements Source {
     return nameAndContent;
   }
 
-  private async retrieveContent(id: string): Promise<RawContent | undefined> {
+  private async retrieveContent(
+    contentId: string,
+  ): Promise<RawContent | undefined> {
     const allContent = await this.retrieveAllContent();
-    const content = allContent.find(({ name }) => name === id);
+    const content = allContent.find(({ id }) => id === contentId);
     return content;
   }
 }
