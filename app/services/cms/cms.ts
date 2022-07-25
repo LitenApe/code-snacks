@@ -21,14 +21,14 @@ class CMS implements Source {
   async getPost(id: string): Promise<unknown> {
     this.#logger.debug(`Retrieving post with [id=${id}]`);
 
-    const post = this.#src.getPost(id);
-
-    if (post === undefined) {
+    try {
+      const post = await this.#src.getPost(id);
+      return post;
+    } catch (err) {
       this.#logger.warn(`Unable to retrieve post with [id=${id}]`);
-      return null;
     }
 
-    return post;
+    return undefined;
   }
 }
 

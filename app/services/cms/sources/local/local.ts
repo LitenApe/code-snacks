@@ -32,7 +32,7 @@ class Local implements Source {
       const content = await readFileContent(this.#content_location, id);
       return content;
     } catch (err) {
-      this.#logger.error(
+      this.#logger.warn(
         `Encountered an error while retrieving post with [id=${id}], [error=${err}]`,
       );
       throw new Error(`Unable to retrieve post with [id=${id}]`);
