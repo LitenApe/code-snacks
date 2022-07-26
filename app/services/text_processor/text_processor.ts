@@ -1,20 +1,20 @@
 import { Content, Frontmatter, Processor } from './domain';
 
 import { Logger } from '../logger';
-import { Remark } from './processors';
+import { processor } from './processors';
 
 class TextProcessor implements Processor {
   #logger: Logger;
 
   #processor: Processor;
 
-  constructor(processor: Processor) {
+  constructor(textProcessor: Processor) {
     this.#logger = new Logger('TextProcessor');
-    this.#processor = processor;
+    this.#processor = textProcessor;
   }
 
-  getFrontmatter(rawContent: string): Frontmatter {
-    const frontmatter = this.#processor.getFrontmatter(rawContent);
+  async getFrontmatter(rawContent: string): Promise<Frontmatter> {
+    const frontmatter = await this.#processor.getFrontmatter(rawContent);
 
     this.#logger.debug(
       `Extracted frontmatter with [keys=${Object.keys(frontmatter).length}]`,
@@ -23,8 +23,8 @@ class TextProcessor implements Processor {
     return frontmatter;
   }
 
-  getContent(rawContent: string): Content {
-    const content = this.#processor.getContent(rawContent);
+  async getContent(rawContent: string): Promise<Content> {
+    const content = await this.#processor.getContent(rawContent);
 
     this.#logger.debug(
       `Extracted frontmatter with [keys=${Object.keys(
@@ -36,4 +36,4 @@ class TextProcessor implements Processor {
   }
 }
 
-export const instance = new TextProcessor(Remark);
+export const instance = new TextProcessor(processor);

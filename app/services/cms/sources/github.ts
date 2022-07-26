@@ -1,6 +1,6 @@
 import type { RawContent, Source } from '../domain';
 
-class GitHub implements Source {
+export class GitHub implements Source {
   async getPosts(): Promise<Array<RawContent>> {
     return [];
   }
@@ -39,5 +39,3 @@ query {
 }
 `;
 */
-
-export const instance = new GitHub();

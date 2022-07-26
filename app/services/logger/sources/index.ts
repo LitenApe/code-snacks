@@ -1,2 +1,4 @@
-export { instance as Console } from './console';
-export { instance as Fake } from './fake';
+import { Console } from './console';
+import { Fake } from './fake';
+
+export const source = process.env.NODE_ENV === 'development' ? new Console() : new Fake();

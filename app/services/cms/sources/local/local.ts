@@ -3,7 +3,7 @@ import { readContentDirectory, readFileContent } from './file_reader_utils';
 
 import { Logger } from '~/services/logger';
 
-class Local implements Source {
+export class Local implements Source {
   #logger: Logger;
 
   #content_location: string;
@@ -68,5 +68,3 @@ class Local implements Source {
     return resolvedContent;
   }
 }
-
-export const instance = new Local();

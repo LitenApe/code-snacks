@@ -1,1 +1,1 @@
-export { instance } from './local';
+export { Local } from './local';

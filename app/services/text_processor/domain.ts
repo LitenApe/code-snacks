@@ -5,6 +5,6 @@ export type Content = {
 };
 
 export interface Processor {
-  getFrontmatter: (content: string) => Frontmatter;
-  getContent: (content: string) => Content;
+  getFrontmatter: (content: string) => Promise<Frontmatter>;
+  getContent: (content: string) => Promise<Content>;
 }

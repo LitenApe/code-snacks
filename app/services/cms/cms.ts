@@ -1,7 +1,6 @@
-import { GitHub, Local } from './sources';
-
 import { Logger } from '../logger';
 import type { Source } from './domain';
+import { source } from './sources';
 
 class CMS {
   #logger: Logger;
@@ -32,5 +31,4 @@ class CMS {
   }
 }
 
-const source = process.env.NODE_ENV === 'development' ? Local : GitHub;
 export const instance = new CMS(source);

@@ -1,2 +1,4 @@
-export { instance as GitHub } from './github';
-export { instance as Local } from './local';
+import { GitHub } from './github';
+import { Local } from './local';
+
+export const source = process.env.NODE_ENV === 'development' ? new Local() : new GitHub();

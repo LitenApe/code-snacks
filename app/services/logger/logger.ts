@@ -1,6 +1,5 @@
-import { Console, Fake } from './sources';
-
 import type { Logg } from './domain';
+import { source } from './sources';
 
 export class Logger implements Logg {
   #name: string;
@@ -9,7 +8,7 @@ export class Logger implements Logg {
 
   constructor(name: string) {
     this.#name = name;
-    this.#src = process.env.NODE_ENV === 'development' ? Console : Fake;
+    this.#src = source;
   }
 
   debug(...args: Array<unknown>): void {

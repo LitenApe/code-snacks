@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import type { Logg } from '../domain';
 
-class Console implements Logg {
+export class Console implements Logg {
   debug(...args: Array<unknown>): void {
     console.debug(...args);
   }
@@ -18,5 +18,3 @@ class Console implements Logg {
     console.error(...args);
   }
 }
-
-export const instance = new Console();
