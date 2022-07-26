@@ -23,10 +23,8 @@ class TextProcessor implements Processor {
     this.#contentProcessor = cProcessor;
   }
 
-  async getFrontmatter(rawContent: string): Promise<Frontmatter> {
-    const frontmatter = await this.#frontmatterProcessor.getFrontmatter(
-      rawContent,
-    );
+  getFrontmatter(rawContent: string): Frontmatter {
+    const frontmatter = this.#frontmatterProcessor.getFrontmatter(rawContent);
 
     const { title, date, ...rest } = frontmatter;
 

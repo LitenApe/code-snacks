@@ -10,10 +10,16 @@ export type Content = {
 };
 
 export interface FrontmatterProcessor {
-  getFrontmatter: (content: string) => Promise<Partial<Frontmatter>>;
+  getFrontmatter: (content: string) => Partial<Frontmatter>;
+  getFrontmatterAndRawContent: (content: string) => {
+    frontmatter: Partial<Frontmatter>;
+    content: string;
+  };
 }
 
 export interface ContentProcessor {
   getContent: (content: string) => Promise<Content>;
 }
-export interface Processor extends FrontmatterProcessor, ContentProcessor {}
+export interface Processor
+  extends Pick<FrontmatterProcessor, 'getFrontmatter'>,
+    ContentProcessor {}
