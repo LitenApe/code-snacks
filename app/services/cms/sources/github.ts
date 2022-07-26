@@ -1,13 +1,14 @@
-import type { Source } from '../domain';
+import type { RawContent, Source } from '../domain';
 
 class GitHub implements Source {
-  async getPosts(): Promise<Array<unknown>> {
+  async getPosts(): Promise<Array<RawContent>> {
     return [];
   }
 
-  async getPost(id: string): Promise<unknown> {
+  async getPost(id: string): Promise<RawContent> {
     return {
       id,
+      content: '',
     };
   }
 }

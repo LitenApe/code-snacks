@@ -3,10 +3,10 @@ import { GitHub, Local } from './sources';
 import { Logger } from '../logger';
 import type { Source } from './domain';
 
-class CMS implements Source {
-  #logger;
+class CMS {
+  #logger: Logger;
 
-  #src;
+  #src: Source;
 
   constructor(src: Source) {
     this.#logger = new Logger('CMS');

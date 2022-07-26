@@ -1,4 +1,9 @@
+export type RawContent = {
+  id: string;
+  content: string;
+};
+
 export interface Source {
-  getPosts: () => Promise<Array<unknown>>;
-  getPost: (id: string) => Promise<unknown>;
+  getPosts: () => Promise<Array<RawContent>>;
+  getPost: (id: string) => Promise<RawContent>;
 }

@@ -1,12 +1,7 @@
+import { RawContent, Source } from '../../domain';
 import { readContentDirectory, readFileContent } from './file_reader_utils';
 
 import { Logger } from '~/services/logger';
-import { Source } from '../../domain';
-
-type RawContent = {
-  id: string;
-  content: string;
-};
 
 class Local implements Source {
   #logger: Logger;
@@ -27,10 +22,13 @@ class Local implements Source {
     this.#content_location = contentDirLocation;
   }
 
-  async getPost(id: string): Promise<unknown> {
+  async getPost(id: string): Promise<RawContent> {
     try {
       const content = await readFileContent(this.#content_location, id);
-      return content;
+      return {
+        id,
+        content,
+      };
     } catch (err) {
       this.#logger.warn(
         `Encountered an error while retrieving post with [id=${id}], [error=${err}]`,
@@ -39,7 +37,7 @@ class Local implements Source {
     }
   }
 
-  async getPosts(): Promise<Array<unknown>> {
+  async getPosts(): Promise<Array<RawContent>> {
     const allContent = await this.retrieveAllContent();
     return allContent;
   }
