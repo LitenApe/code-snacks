@@ -1,20 +1,36 @@
+import { Frontmatter, Source } from './domain';
+
 import { Logger } from '../logger';
-import type { Source } from './domain';
+import { TextProcessor } from '../text_processor';
 import { source } from './sources';
 
 class CMS {
-  #logger: Logger;
+  #logger;
 
-  #src: Source;
+  #src;
+
+  #processor;
 
   constructor(src: Source) {
     this.#logger = new Logger('CMS');
     this.#src = src;
+    this.#processor = TextProcessor;
   }
 
-  async getPosts(): Promise<Array<unknown>> {
+  async getPosts(): Promise<Array<Frontmatter>> {
     this.#logger.debug('Retrieving posts');
-    return this.#src.getPosts();
+    const rawPosts = await this.#src.getPosts();
+
+    const posts = rawPosts.map(async (post) => ({
+      id: post.id,
+      frontmatter: await this.#processor.getFrontmatter(post.content),
+    }));
+
+    return (await Promise.allSettled(posts))
+      .filter(
+        (result): result is PromiseFulfilledResult<any> => result.status === 'fulfilled',
+      )
+      .map(({ value }) => value);
   }
 
   async getPost(id: string): Promise<unknown> {

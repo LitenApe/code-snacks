@@ -1,3 +1,11 @@
+export type Frontmatter = {
+  id: string;
+  frontmatter: {
+    title: string;
+    date: Date;
+  };
+};
+
 export type RawContent = {
   id: string;
   content: string;

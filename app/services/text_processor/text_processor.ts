@@ -1,30 +1,53 @@
-import { Content, Frontmatter, Processor } from './domain';
+import {
+  Content,
+  ContentProcessor,
+  Frontmatter,
+  FrontmatterProcessor,
+  Processor,
+} from './domain';
+import { contentProcessor, frontmatterProcessor } from './processors';
 
 import { Logger } from '../logger';
-import { processor } from './processors';
 
 class TextProcessor implements Processor {
   #logger: Logger;
 
-  #processor: Processor;
+  #frontmatterProcessor: FrontmatterProcessor;
 
-  constructor(textProcessor: Processor) {
+  #contentProcessor: ContentProcessor;
+
+  constructor(fProcessor: FrontmatterProcessor, cProcessor: ContentProcessor) {
     this.#logger = new Logger('TextProcessor');
-    this.#processor = textProcessor;
+
+    this.#frontmatterProcessor = fProcessor;
+    this.#contentProcessor = cProcessor;
   }
 
   async getFrontmatter(rawContent: string): Promise<Frontmatter> {
-    const frontmatter = await this.#processor.getFrontmatter(rawContent);
-
-    this.#logger.debug(
-      `Extracted frontmatter with [keys=${Object.keys(frontmatter).length}]`,
+    const frontmatter = await this.#frontmatterProcessor.getFrontmatter(
+      rawContent,
     );
 
-    return frontmatter;
+    const { title, date, ...rest } = frontmatter;
+
+    if (date === undefined || title === undefined) {
+      this.#logger.warn(
+        `Attempted to extract incomplete frontmatter. [frontmatter=${frontmatter}]`,
+      );
+      throw new Error(
+        'Attempted to extract incomplete frontmatter. Frontmatters must include a title and date!',
+      );
+    }
+
+    return {
+      title,
+      date,
+      ...rest,
+    };
   }
 
   async getContent(rawContent: string): Promise<Content> {
-    const content = await this.#processor.getContent(rawContent);
+    const content = await this.#contentProcessor.getContent(rawContent);
 
     this.#logger.debug(
       `Extracted frontmatter with [keys=${Object.keys(
@@ -36,4 +59,7 @@ class TextProcessor implements Processor {
   }
 }
 
-export const instance = new TextProcessor(processor);
+export const instance = new TextProcessor(
+  frontmatterProcessor,
+  contentProcessor,
+);
