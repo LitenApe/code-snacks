@@ -1,4 +1,5 @@
 import { Content, Frontmatter, Source } from './domain';
+import { isFulfilledPromise, sortByDate } from './helpers';
 
 import { Logger } from '../logger';
 import { TextProcessor } from '../text_processor';
@@ -26,14 +27,12 @@ class CMS {
       frontmatter: await this.#processor.getFrontmatter(post.content),
     }));
 
-    return (await Promise.allSettled(posts))
-      .filter(
-        (result): result is PromiseFulfilledResult<Frontmatter> => result.status === 'fulfilled',
-      )
+    const resolvedPosts = await Promise.allSettled(posts);
+
+    return resolvedPosts
+      .filter(isFulfilledPromise)
       .map(({ value }) => value)
-      .sort(
-        (a, b) => b.frontmatter.date.getTime() - a.frontmatter.date.getTime(),
-      );
+      .sort(sortByDate);
   }
 
   async getPost(id: string): Promise<Content> {
