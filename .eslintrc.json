@@ -30,7 +30,8 @@
           "react-dom/*",
           "~/services/*",
           "~/features/*",
-          "~/components/*"
+          "~/components/*",
+          "highlight.js/**/*"
         ]
       }
     ],

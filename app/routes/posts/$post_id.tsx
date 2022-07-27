@@ -2,6 +2,7 @@ import { CMS, Content } from '~/services/cms';
 
 import { DangerousHTML } from '~/components/DangerousHTML';
 import { LoaderFunction } from '@remix-run/node';
+import codeHighlightingStylesheet from 'highlight.js/styles/github-dark.css';
 import { useLoaderData } from '@remix-run/react';
 
 type Data = Content;
@@ -43,4 +44,13 @@ export default function Post(): JSX.Element {
       <DangerousHTML content={data.content} />
     </>
   );
+}
+
+export function links() {
+  return [
+    {
+      rel: 'stylesheet',
+      href: codeHighlightingStylesheet,
+    },
+  ];
 }
