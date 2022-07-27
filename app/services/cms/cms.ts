@@ -1,4 +1,4 @@
-import { Frontmatter, Source } from './domain';
+import { Content, Frontmatter, Source } from './domain';
 
 import { Logger } from '../logger';
 import { TextProcessor } from '../text_processor';
@@ -28,8 +28,7 @@ class CMS {
 
     return (await Promise.allSettled(posts))
       .filter(
-        (result): result is PromiseFulfilledResult<Frontmatter> =>
-          result.status === 'fulfilled',
+        (result): result is PromiseFulfilledResult<Frontmatter> => result.status === 'fulfilled',
       )
       .map(({ value }) => value)
       .sort(
@@ -37,17 +36,21 @@ class CMS {
       );
   }
 
-  async getPost(id: string): Promise<unknown> {
+  async getPost(id: string): Promise<Content> {
     this.#logger.debug(`Retrieving post with [id=${id}]`);
 
     try {
       const post = await this.#src.getPost(id);
-      return post;
+      return {
+        id,
+        ...this.#processor.getContent(post.content),
+      };
     } catch (err) {
-      this.#logger.warn(`Unable to retrieve post with [id=${id}]`);
+      this.#logger.warn(
+        `Unable to retrieve post with [id=${id}] due to [error=${err}]`,
+      );
+      throw new Error(`Unable to extract content with [id=${id}]`);
     }
-
-    return undefined;
   }
 }
 

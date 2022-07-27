@@ -6,6 +6,10 @@ export type Frontmatter = {
   };
 };
 
+export type Content = {
+  content: string;
+} & Frontmatter;
+
 export type RawContent = {
   id: string;
   content: string;

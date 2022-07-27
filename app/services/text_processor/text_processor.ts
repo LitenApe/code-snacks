@@ -13,19 +13,19 @@ import { isValidFrontmatter } from './helpers';
 class TextProcessor implements Processor {
   #logger: Logger;
 
-  #frontmatterProcessor: FrontmatterProcessor;
+  #fProcessor: FrontmatterProcessor;
 
-  #contentProcessor: ContentProcessor;
+  #cProcessor: ContentProcessor;
 
   constructor(fProcessor: FrontmatterProcessor, cProcessor: ContentProcessor) {
     this.#logger = new Logger('TextProcessor');
 
-    this.#frontmatterProcessor = fProcessor;
-    this.#contentProcessor = cProcessor;
+    this.#fProcessor = fProcessor;
+    this.#cProcessor = cProcessor;
   }
 
   getFrontmatter(rawContent: string): Frontmatter {
-    const frontmatter = this.#frontmatterProcessor.getFrontmatter(rawContent);
+    const frontmatter = this.#fProcessor.getFrontmatter(rawContent);
 
     if (!isValidFrontmatter(frontmatter)) {
       this.#logger.warn(
@@ -41,16 +41,31 @@ class TextProcessor implements Processor {
     return frontmatter;
   }
 
-  async getContent(rawContent: string): Promise<Content> {
-    const content = await this.#contentProcessor.getContent(rawContent);
+  getContent(rawContent: string): Content {
+    const { frontmatter, content } = this.#fProcessor.getFrontmatterAndRawContent(rawContent);
 
-    this.#logger.debug(
-      `Extracted frontmatter with [keys=${Object.keys(
-        content.frontmatter,
-      )}] and content of [length=${content.content.length}]`,
-    );
+    if (content.length === 0) {
+      this.#logger.warn('Found no content to process over to HTML');
+      throw new Error('Attempted to process empty content!');
+    }
 
-    return content;
+    const processedContent = this.#cProcessor.getContent(content);
+
+    if (!isValidFrontmatter(frontmatter)) {
+      this.#logger.warn(
+        `Attempted to extract incomplete frontmatter. [frontmatter=${JSON.stringify(
+          frontmatter,
+        )}]`,
+      );
+      throw new Error(
+        'Attempted to extract incomplete frontmatter. Frontmatters must include a title and date!',
+      );
+    }
+
+    return {
+      frontmatter,
+      content: processedContent,
+    };
   }
 }
 

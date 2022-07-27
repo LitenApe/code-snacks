@@ -1,8 +1,10 @@
-import { CMS } from '~/services/cms';
+import { CMS, Content } from '~/services/cms';
+
+import { DangerousHTML } from '~/components/DangerousHTML';
 import { LoaderFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 
-type Data = any;
+type Data = Content;
 
 export async function loader({
   params,
@@ -10,7 +12,9 @@ export async function loader({
   const postId = params.post_id;
 
   if (postId === undefined) {
-    return null;
+    throw new Response('Bad Request', {
+      status: 400,
+    });
   }
 
   const post = await CMS.getPost(postId);
@@ -29,8 +33,14 @@ export default function Post(): JSX.Element {
 
   return (
     <>
-      <h1>Post</h1>
-      {JSON.stringify(data)}
+      <h1>{data.frontmatter.title}</h1>
+      <p>
+        Published:{' '}
+        <time dateTime={data.frontmatter.date}>
+          {new Date(data.frontmatter.date).toLocaleDateString()}
+        </time>
+      </p>
+      <DangerousHTML content={data.content} />
     </>
   );
 }

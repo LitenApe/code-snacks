@@ -18,8 +18,9 @@ export interface FrontmatterProcessor {
 }
 
 export interface ContentProcessor {
-  getContent: (content: string) => Promise<Content>;
+  getContent: (content: string) => string;
 }
-export interface Processor
-  extends Pick<FrontmatterProcessor, 'getFrontmatter'>,
-    ContentProcessor {}
+export interface Processor {
+  getFrontmatter: (content: string) => Frontmatter;
+  getContent: (content: string) => Content;
+}

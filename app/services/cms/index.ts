@@ -1,2 +1,2 @@
 export { instance as CMS } from './cms';
-export type { Frontmatter } from './domain';
+export type { Frontmatter, Content } from './domain';
