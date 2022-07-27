@@ -5,7 +5,7 @@ function isValidDate(date: any): date is Date {
     return false;
   }
 
-  if (Number.isNaN(date.getMilliseconds())) {
+  if (Number.isNaN(date.getTime())) {
     return false;
   }
 

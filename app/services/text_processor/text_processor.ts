@@ -29,7 +29,9 @@ class TextProcessor implements Processor {
 
     if (!isValidFrontmatter(frontmatter)) {
       this.#logger.warn(
-        `Attempted to extract incomplete frontmatter. [frontmatter=${frontmatter}]`,
+        `Attempted to extract incomplete frontmatter. [frontmatter=${JSON.stringify(
+          frontmatter,
+        )}]`,
       );
       throw new Error(
         'Attempted to extract incomplete frontmatter. Frontmatters must include a title and date!',

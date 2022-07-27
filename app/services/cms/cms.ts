@@ -28,9 +28,13 @@ class CMS {
 
     return (await Promise.allSettled(posts))
       .filter(
-        (result): result is PromiseFulfilledResult<any> => result.status === 'fulfilled',
+        (result): result is PromiseFulfilledResult<Frontmatter> =>
+          result.status === 'fulfilled',
       )
-      .map(({ value }) => value);
+      .map(({ value }) => value)
+      .sort(
+        (a, b) => b.frontmatter.date.getTime() - a.frontmatter.date.getTime(),
+      );
   }
 
   async getPost(id: string): Promise<unknown> {
