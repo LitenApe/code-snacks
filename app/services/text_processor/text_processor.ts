@@ -8,6 +8,7 @@ import {
 import { contentProcessor, frontmatterProcessor } from './processors';
 
 import { Logger } from '../logger';
+import { isValidFrontmatter } from './helpers';
 
 class TextProcessor implements Processor {
   #logger: Logger;
@@ -26,9 +27,7 @@ class TextProcessor implements Processor {
   getFrontmatter(rawContent: string): Frontmatter {
     const frontmatter = this.#frontmatterProcessor.getFrontmatter(rawContent);
 
-    const { title, date, ...rest } = frontmatter;
-
-    if (date === undefined || title === undefined) {
+    if (!isValidFrontmatter(frontmatter)) {
       this.#logger.warn(
         `Attempted to extract incomplete frontmatter. [frontmatter=${frontmatter}]`,
       );
@@ -37,11 +36,7 @@ class TextProcessor implements Processor {
       );
     }
 
-    return {
-      title,
-      date,
-      ...rest,
-    };
+    return frontmatter;
   }
 
   async getContent(rawContent: string): Promise<Content> {

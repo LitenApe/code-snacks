@@ -1,0 +1,1 @@
+export { isValidFrontmatter } from './isValidFrontmatter';
