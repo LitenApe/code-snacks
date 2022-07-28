@@ -1,7 +1,7 @@
 import { CMS, Content } from '~/services/cms';
+import { LoaderFunction, MetaFunction } from '@remix-run/node';
 
 import { DangerousHTML } from '~/components/DangerousHTML';
-import { LoaderFunction } from '@remix-run/node';
 import codeHighlightingStylesheet from 'highlight.js/styles/github-dark.css';
 import { useLoaderData } from '@remix-run/react';
 
@@ -45,6 +45,14 @@ export default function Post(): JSX.Element {
     </>
   );
 }
+
+export const meta: MetaFunction = (args) => {
+  const data = args.data as Data;
+
+  return {
+    title: `${data.frontmatter.title} | Tech Snacks`,
+  };
+};
 
 export function links() {
   return [
