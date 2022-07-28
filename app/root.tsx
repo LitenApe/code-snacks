@@ -1,3 +1,4 @@
+import type { HeadersFunction, MetaFunction } from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -9,10 +10,14 @@ import {
 
 import { CatchBoundary as KnownExceptionBoundary } from '~/features/CatchBoundary';
 import { Layout } from '~/features/Layout';
-import type { MetaFunction } from '@remix-run/node';
 import { ErrorBoundary as UnknownExceptionBoundary } from '~/features/ErrorBoundary';
 
 export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
+
+export const headers: HeadersFunction = () => ({
+  'Cache-Control':
+    'max-age=31556952, stale-while-revalidation=2592000, stale-if-error=1209600',
+});
 
 export default function App(): JSX.Element {
   return (
