@@ -1,4 +1,8 @@
-import type { HeadersFunction, MetaFunction } from '@remix-run/node';
+import type {
+  HeadersFunction,
+  LinksFunction,
+  MetaFunction,
+} from '@remix-run/node';
 import {
   Links,
   LiveReload,
@@ -19,16 +23,19 @@ export const headers: HeadersFunction = () => ({
     'max-age=31556952, stale-while-revalidation=2592000, stale-if-error=1209600',
 });
 
+export const links: LinksFunction = () => [
+  {
+    rel: 'stylesheet',
+    href: 'https://cdn.jsdelivr.net/npm/holiday.css@0.9.8',
+  },
+];
+
 export default function App(): JSX.Element {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/holiday.css@0.9.8"
-        />
         <Meta />
         <Links />
       </head>
