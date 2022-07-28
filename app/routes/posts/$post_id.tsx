@@ -18,15 +18,14 @@ export async function loader({
     });
   }
 
-  const post = await CMS.getPost(postId);
-
-  if (post === undefined) {
+  try {
+    const post = await CMS.getPost(postId);
+    return post;
+  } catch (ignored) {
     throw new Response('Not Found', {
       status: 404,
     });
   }
-
-  return post;
 }
 
 export default function Post(): JSX.Element {
