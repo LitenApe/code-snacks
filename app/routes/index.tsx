@@ -15,7 +15,7 @@ export default function Index(): JSX.Element {
     <>
       <h1>Tech Snacks</h1>
       <h2>Recent posts</h2>
-      <ol>
+      <ul>
         {data.map((post) => (
           <li key={`/posts/${post.id}`}>
             <Link to={`/posts/${post.id}`}>
@@ -31,7 +31,7 @@ export default function Index(): JSX.Element {
             </Link>
           </li>
         ))}
-      </ol>
+      </ul>
     </>
   );
 }
