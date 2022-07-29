@@ -2,7 +2,7 @@ import { Landmarks } from './landmarks';
 
 export function SkipLinks(): JSX.Element {
   return (
-    <nav>
+    <nav id="skip-links">
       <ul>
         <li>
           <a href={`#${Landmarks.NAVBAR}`}>Navigation bar</a>

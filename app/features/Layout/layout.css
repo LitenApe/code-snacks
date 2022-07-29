@@ -1,0 +1,9 @@
+#skip-links {
+  height: 0;
+  overflow: hidden;
+  border-bottom: none;
+}
+
+#skip-links:focus-within {
+  height: fit-content;
+}

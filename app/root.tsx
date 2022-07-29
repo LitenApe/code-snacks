@@ -3,6 +3,7 @@ import type {
   LinksFunction,
   MetaFunction,
 } from '@remix-run/node';
+import { Layout, links as layoutLinks } from '~/features/Layout';
 import {
   Links,
   LiveReload,
@@ -13,7 +14,6 @@ import {
 } from '@remix-run/react';
 
 import { CatchBoundary as KnownExceptionBoundary } from '~/features/CatchBoundary';
-import { Layout } from '~/features/Layout';
 import { ErrorBoundary as UnknownExceptionBoundary } from '~/features/ErrorBoundary';
 
 export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
@@ -24,6 +24,7 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const links: LinksFunction = () => [
+  ...layoutLinks,
   {
     rel: 'stylesheet',
     href: 'https://cdn.jsdelivr.net/npm/holiday.css@0.9.8',
