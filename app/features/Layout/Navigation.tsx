@@ -10,6 +10,11 @@ export function Navigation(): JSX.Element {
             Home
           </Link>
         </li>
+        <li>
+          <Link prefetch="intent" to="/posts">
+            Archive
+          </Link>
+        </li>
       </ul>
     </nav>
   );
