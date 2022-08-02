@@ -67,5 +67,6 @@
   ],
   "globals": {
     "JSX": "readonly"
-  }
+  },
+  "ignorePatterns": ["app/content/posts/*"]
 }

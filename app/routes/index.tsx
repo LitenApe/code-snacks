@@ -1,11 +1,14 @@
-import { CMS, Frontmatter } from '~/services/cms';
+import { CMS, Content } from '~/services/cms';
 import { Link, useLoaderData } from '@remix-run/react';
 
-type Data = Array<Frontmatter>;
+type Data = Array<Content>;
 
 export async function loader(): Promise<Data> {
   const posts = await CMS.getPosts();
-  return posts;
+  const postsWithContent = await Promise.all(
+    posts.slice(0, 3).map(({ id }) => CMS.getPost(id)),
+  );
+  return postsWithContent;
 }
 
 export default function Index(): JSX.Element {

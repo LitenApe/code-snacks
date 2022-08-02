@@ -23,7 +23,7 @@ class CMS {
     const rawPosts = await this.#src.getPosts();
 
     const posts = rawPosts.map(async ({ id, content }) => ({
-      id: id.substring(0, id.indexOf('.')),
+      id: id.indexOf('.') === -1 ? id : id.substring(0, id.indexOf('.')),
       frontmatter: await this.#processor.getFrontmatter(content),
     }));
 
