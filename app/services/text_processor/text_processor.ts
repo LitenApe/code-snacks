@@ -67,6 +67,20 @@ class TextProcessor implements Processor {
       content: processedContent,
     };
   }
+
+  getExcerp(content: string): string {
+    const re = /<p>.+<\/p>/;
+    const matches = re.exec(content);
+
+    this.#logger.debug(`Extracted excerp [matches=${JSON.stringify(matches)}]`);
+
+    if (matches === null || matches.length === 0) {
+      this.#logger.error(`Unable to extract excerp from [content=${content}]`);
+      throw new Error('Unable to extract excerp from content');
+    }
+
+    return matches[0];
+  }
 }
 
 export const instance = new TextProcessor(

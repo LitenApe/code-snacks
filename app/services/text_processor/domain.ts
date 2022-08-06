@@ -23,4 +23,5 @@ export interface ContentProcessor {
 export interface Processor {
   getFrontmatter: (content: string) => Frontmatter;
   getContent: (content: string) => Content;
+  getExcerp: (content: string) => string;
 }
