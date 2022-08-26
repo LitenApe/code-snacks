@@ -1,6 +1,9 @@
 import layoutStylesheet from './layout.css';
 
-export { Layout } from './Layout';
+export { Footer } from './Footer';
+export { Navigation } from './Navigation';
+export { SkipLinks } from './SkipLinks';
+export { Main } from './Main';
 
 export const links = [
   {

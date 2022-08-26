@@ -1,9 +1,15 @@
+import {
+  Footer,
+  Main,
+  Navigation,
+  SkipLinks,
+  links as layoutLinks,
+} from '~/features/Layout';
 import type {
   HeadersFunction,
   LinksFunction,
   MetaFunction,
 } from '@remix-run/node';
-import { Layout, links as layoutLinks } from '~/features/Layout';
 import {
   Links,
   LiveReload,
@@ -38,9 +44,13 @@ export default function App(): JSX.Element {
         <Links />
       </head>
       <body>
-        <Layout>
+        <SkipLinks />
+        <Navigation />
+        <Main>
           <Outlet />
-        </Layout>
+        </Main>
+        <Footer />
+
         <ScrollRestoration />
         <Scripts />
         {process.env.NODE_ENV === 'development' && <LiveReload />}
