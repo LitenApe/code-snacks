@@ -48,6 +48,12 @@ export default function Post(): JSX.Element {
 export const meta: MetaFunction = (args) => {
   const data = args.data as Data;
 
+  if (typeof data === 'undefined') {
+    return {
+      title: 'Tech Snacks',
+    };
+  }
+
   return {
     title: `${data.frontmatter.title} | Tech Snacks`,
   };

@@ -1,5 +1,4 @@
 import { BadRequest } from './BadRequest';
-import { Layout } from '../Layout';
 import { Logger } from '~/services/logger';
 import { NotFound } from './NotFound';
 import { Unauthorized } from './Unauthorized';
@@ -23,5 +22,5 @@ export function CatchBoundary(): JSX.Element {
   const caught = useCatch();
   const children = getExceptionMessage(caught.status);
   logger.error(`[status=${caught.status}]`, `[data=${caught.data}]`);
-  return <Layout>{children}</Layout>;
+  return children;
 }

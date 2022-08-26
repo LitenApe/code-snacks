@@ -25,6 +25,7 @@ export default function Index(): JSX.Element {
       <h1>Tech Snacks</h1>
       <h2>Recent posts</h2>
       <ul>
+        <Link to="/posts/fd">fsom</Link>
         {data.map((post) => (
           <li key={`/posts/${post.id}`}>
             <Link to={`/posts/${post.id}`}>

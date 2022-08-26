@@ -13,9 +13,6 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 
-import { CatchBoundary as KnownExceptionBoundary } from '~/features/CatchBoundary';
-import { ErrorBoundary as UnknownExceptionBoundary } from '~/features/ErrorBoundary';
-
 export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
 
 export const headers: HeadersFunction = () => ({
@@ -50,13 +47,4 @@ export default function App(): JSX.Element {
       </body>
     </html>
   );
-}
-
-export function CatchBoundary() {
-  return <KnownExceptionBoundary />;
-}
-
-export function ErrorBoundary(props: { error: Error }) {
-  const { error } = props;
-  return <UnknownExceptionBoundary error={error} />;
 }
