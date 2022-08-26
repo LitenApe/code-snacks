@@ -2,7 +2,7 @@ import { CatchBoundary as KnownExceptionBoundary } from '~/features/CatchBoundar
 import { Outlet } from '@remix-run/react';
 import { ErrorBoundary as UnknownExceptionBoundary } from '~/features/ErrorBoundary';
 
-export default function RootErrorHandler() {
+export default function Root() {
   return <Outlet />;
 }
 
