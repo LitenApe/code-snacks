@@ -1,0 +1,6 @@
+runtime: nodejs16
+
+env_variables:
+  NODE_ENV: production
+  CONTENT_LOCATION: app/content/posts
+  GITHUB_RAW_LOCATION: https://raw.githubusercontent.com/LitenApe/tech-snacks/main/app/content/posts
