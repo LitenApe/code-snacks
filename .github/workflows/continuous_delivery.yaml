@@ -41,6 +41,3 @@ jobs:
         with:
           project_id: tech-snacks
           deliverables: app.yaml
-
-      - name: Health check
-        run: 'curl "${{ steps.deploy.outputs.url }}"'
