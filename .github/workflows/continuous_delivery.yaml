@@ -23,7 +23,7 @@ jobs:
         run: npm run build
 
   deploy:
-    name: 'Deploying to Google Cloud'
+    name: 'Deploy to Google Cloud'
     runs-on: ubuntu-latest
     needs: build
 
