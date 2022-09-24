@@ -3,7 +3,7 @@ title: Markdown Nested Test File
 date: 2022-04-27
 ---
 
-This is a test paragraph to verify that the CD pipeline works as intended, where updates to main are published right away. Another thing to verify is whether or not the current caching rules will prevent this update from propagating out properly or not. Sadly, this test file has to be removed when the first blog post is posted, but don't cry. It was only meant to be like this. Test files such as this are not meant to live for long.
+This is a test paragraph to verify that the CD pipeline works as intended, where updates to main are published right away. Another thing to verify is whether or not the current caching rules will prevent this update from propagating out properly or not. Sadly, this test file has to be removed when the first blog post is posted, but don't cry. It was only meant to be like this. Test files such as this are not meant to live for long. Still testing things.
 
 [Attachment](ghf://nested_markdown/debounce.ts)
 

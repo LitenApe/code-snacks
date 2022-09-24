@@ -1,20 +1,11 @@
-import { CMS, Content } from '~/services/cms';
+import { CMS, Frontmatter } from '~/services/cms';
 import { Link, useLoaderData } from '@remix-run/react';
 
-import { DangerousHTML } from '~/components/DangerousHTML';
-import { TextProcessor } from '~/services/text_processor';
-
-type Data = Array<Content>;
+type Data = Array<Frontmatter>;
 
 export async function loader(): Promise<Data> {
   const posts = await CMS.getPosts();
-  const postsWithContent = await Promise.all(
-    posts.slice(0, 3).map(({ id }) => CMS.getPost(id)),
-  );
-  return postsWithContent.map((post) => ({
-    ...post,
-    content: TextProcessor.getExcerp(post.content),
-  }));
+  return posts;
 }
 
 export default function Index(): JSX.Element {
@@ -36,7 +27,6 @@ export default function Index(): JSX.Element {
                     {new Date(post.frontmatter.date).toLocaleDateString()}
                   </time>
                 </p>
-                <DangerousHTML content={post.content} />
               </article>
             </Link>
           </li>
