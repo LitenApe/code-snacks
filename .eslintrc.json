@@ -26,13 +26,7 @@
     "import/no-internal-modules": [
       "error",
       {
-        "allow": [
-          "react-dom/*",
-          "~/services/*",
-          "~/features/*",
-          "~/components/*",
-          "highlight.js/**/*"
-        ]
+        "allow": ["react-dom/*", "~/services/*", "~/ui/*", "highlight.js/**/*"]
       }
     ],
     "import/order": "off",

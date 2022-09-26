@@ -1,7 +1,7 @@
 import { CMS, Content } from '~/services/cms';
 import { LoaderFunction, MetaFunction } from '@remix-run/node';
 
-import { DangerousHTML } from '~/components/DangerousHTML';
+import { DangerousHTML } from '~/ui/DangerousHTML';
 import codeHighlightingStylesheet from 'highlight.js/styles/github-dark.css';
 import { useLoaderData } from '@remix-run/react';
 
