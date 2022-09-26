@@ -1,5 +1,7 @@
 import { CMS, Frontmatter } from '~/services/cms';
-import { Link, useLoaderData } from '@remix-run/react';
+
+import { PostPreview } from '~/ui/PostPreview';
+import { useLoaderData } from '@remix-run/react';
 
 type Data = Array<Frontmatter>;
 
@@ -18,17 +20,7 @@ export default function Index(): JSX.Element {
       <ul>
         {data.map((post) => (
           <li key={`/posts/${post.id}`}>
-            <Link to={`/posts/${post.id}`}>
-              <article>
-                <header>{post.frontmatter.title}</header>
-                <p>
-                  published:{' '}
-                  <time dateTime={post.frontmatter.date}>
-                    {new Date(post.frontmatter.date).toLocaleDateString()}
-                  </time>
-                </p>
-              </article>
-            </Link>
+            <PostPreview post={post} />
           </li>
         ))}
       </ul>
