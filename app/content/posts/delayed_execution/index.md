@@ -40,7 +40,7 @@ const throttledConsoleLogger = throttle(console.log)
 
 The throttle function above might look intimidating with all the typing, but is actually quite straight forward when we begin to dissect it. Our throttle function takes in any function we wish to throttle and returns a new function which can be used in-place of the originally intended function. We are, in other words creating a throttled version of whichever function that is passed as argument to our function.
 
-The generic syntax `<P extends Array<unknown>>` is to help us maintain type safety, by mainting the same type siganture between the original and throttled function. The `...params` syntax means that we want to allow for a variable number of parameters, which results in all function argument getting passed to us as an array of arguments, which we then send over to `func` to allow it to be invoked with the correct arguments.
+The generic syntax `<P extends Array<unknown>>` is to help us maintain type safety, by maintaing the same type siganture between the original and throttled function. The `...params` syntax means that we want to allow for a variable number of parameters, which results in all function argument getting passed to us as an array of arguments, which we then send over to `func` to allow it to be invoked with the correct arguments.
 
 The most important piece of code, however, is the `if-statement`, which literally ignores everything as long as a timeout is attached to our window. A `timeout` will be created and cleanup after itself by controlling the `timer` variable indicate whether it is possible to execute the desired function or not.
 
