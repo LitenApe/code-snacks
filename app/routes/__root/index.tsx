@@ -21,7 +21,7 @@ export default function Index(): JSX.Element {
         developer, or more specifically, a frontend developer. I love to create
         things for the web and have built up a repertoar of opinions on how
         things should be made, just like any other developer. Which is why this
-        site was made in the first place. This is a site created to share my
+        site was made in the first place. This is a place created to share my
         opinions on everything related to development. The posts you will find
         here are heavily weighted towards web development, as that is where I
         spend most of my time.
