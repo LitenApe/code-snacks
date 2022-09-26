@@ -2,6 +2,7 @@ import { CMS, Content } from '~/services/cms';
 import { LoaderFunction, MetaFunction } from '@remix-run/node';
 
 import { DangerousHTML } from '~/ui/DangerousHTML';
+import { Time } from '~/ui/Time';
 import codeHighlightingStylesheet from 'highlight.js/styles/github-dark.css';
 import { useLoaderData } from '@remix-run/react';
 
@@ -35,10 +36,7 @@ export default function Post(): JSX.Element {
     <>
       <h1>{data.frontmatter.title}</h1>
       <p>
-        Published:{' '}
-        <time dateTime={data.frontmatter.date}>
-          {new Date(data.frontmatter.date).toLocaleDateString()}
-        </time>
+        Published: <Time date={data.frontmatter.date} />
       </p>
       <DangerousHTML content={data.content} />
     </>
