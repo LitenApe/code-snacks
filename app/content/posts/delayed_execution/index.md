@@ -8,6 +8,7 @@ date: 2022-09-26
 - [Throttle](#throttle)
 - [Debounce](#debounce)
 - [Closing Words](#closing-words)
+- [Attachments](#attachments)
 
 From time to time, we might need to delay and reduce the number of executions invoked, due to performance or cost. The terms most commonly associated with this kind of operation is throttling or debouncing. They are two different tools in a developers toolkit, which are quite similar, but solves different problems. In other words, debounce and throttle prevents a function from running too frequently.
 
@@ -36,7 +37,7 @@ function throttle<P extends Array<unknown>>(
 const throttledConsoleLogger = throttle(console.log)
 ```
 
-[throttle.ts](ghf://delayed_execution/throttle.ts)
+Attachment: [throttle.ts](ghf://delayed_execution/throttle.ts)
 
 The throttle function above might look intimidating with all the typing, but is actually quite straight forward when we begin to dissect it. Our throttle function takes in any function we wish to throttle and returns a new function which can be used in-place of the originally intended function. We are, in other words creating a throttled version of whichever function that is passed as argument to our function.
 
@@ -66,10 +67,17 @@ function debounce<P extends Array<unknown>>(
 }
 ```
 
-[debounce.ts](ghf://delayed_execution/debounce.ts)
+Attachment: [debounce.ts](ghf://delayed_execution/debounce.ts)
 
 The function above is almost identical to `throttle`, with one important differences. We are clearing the timeout every time the debounced function is invoked, and creating a new timeout, essentially resetting the timer for when we want to execute our function. Other then that, we see that everything is essentially similar, yet different to solve their own problems.
 
 ## Closing Words
 
 Debounce and throttle are two tools which I find essential in my toolkit, as they helps me reduce the amount of request I make towards whichever service I integrate with whenever the requests are a direct result from a user typing or changing values in a form. They are quite easy to implement and test, which is why I would encourage you to implement your own intead of relying on third-party libraries. However, if performance is an essential part of your work, then I would instead use a highly popular third-party library, as those are guaranteed to be alot more performant then the snippets shown above. You are, however, loosing a little bit of control of your code, as you now have to put trust into someone elses code to operate without any malicious code.
+
+## Attachments
+
+List of all attachments mentioned in the post
+
+- [throttle.ts](ghf://delayed_execution/throttle.ts)
+- [debounce.ts](ghf://delayed_execution/debounce.ts)
