@@ -11,12 +11,12 @@
     "format": "eslint app/ --fix"
   },
   "dependencies": {
-    "@remix-run/node": "^1.7.0",
-    "@remix-run/react": "^1.7.0",
-    "@remix-run/serve": "^1.7.0",
+    "@remix-run/node": "^1.7.2",
+    "@remix-run/react": "^1.7.2",
+    "@remix-run/serve": "^1.7.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.6.0",
-    "marked": "^4.0.18",
+    "marked": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
