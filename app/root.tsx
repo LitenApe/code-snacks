@@ -4,7 +4,7 @@ import {
   Navigation,
   SkipLinks,
   links as layoutLinks,
-} from '~/ui/Layout';
+} from '~/components/Layout';
 import type {
   HeadersFunction,
   LinksFunction,

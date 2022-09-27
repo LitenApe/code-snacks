@@ -1,6 +1,6 @@
 import { CMS, Frontmatter } from '~/services/cms';
 
-import { PostPreview } from '~/ui/PostPreview';
+import { PostPreview } from '~/components/PostPreview';
 import { useLoaderData } from '@remix-run/react';
 
 type Data = Array<Frontmatter>;
