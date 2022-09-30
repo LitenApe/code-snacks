@@ -12,11 +12,15 @@ export class Logger implements Logg {
   }
 
   debug(...args: Array<unknown>): void {
-    this.#src.debug(`[name=${this.#name}]`, ...args);
+    if (process.env.NODE_ENV === 'development') {
+      this.#src.debug(`[name=${this.#name}]`, ...args);
+    }
   }
 
   info(...args: Array<unknown>): void {
-    this.#src.info(`[name=${this.#name}]`, ...args);
+    if (process.env.NODE_ENV === 'development') {
+      this.#src.info(`[name=${this.#name}]`, ...args);
+    }
   }
 
   warn(...args: Array<unknown>): void {
