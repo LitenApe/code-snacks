@@ -9,7 +9,7 @@ enum NAVIGATION_MODE {
   MOUSE,
 }
 
-export function SkipLinks(): JSX.Element {
+function useViewController() {
   const containerRef = useRef<HTMLElement | null>(null);
   const [mode, setMode] = useState<NAVIGATION_MODE | null>(null);
 
@@ -42,8 +42,14 @@ export function SkipLinks(): JSX.Element {
     };
   }, [updateNavigationMode]);
 
+  return { ref: containerRef };
+}
+
+export function SkipLinks(): JSX.Element {
+  const { ref } = useViewController();
+
   return (
-    <nav ref={containerRef} id="skip-links" tabIndex={-1}>
+    <nav ref={ref} id="skip-links" tabIndex={-1}>
       <ul>
         <li>
           <a href={`#${Landmarks.NAVBAR}`}>Navigation bar</a>
