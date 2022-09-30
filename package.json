@@ -14,6 +14,7 @@
     "@remix-run/node": "^1.7.2",
     "@remix-run/react": "^1.7.2",
     "@remix-run/serve": "^1.7.2",
+    "dirty-kitchen": "^0.3.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.6.0",
     "marked": "^4.1.0",

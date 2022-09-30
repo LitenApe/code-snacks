@@ -18,6 +18,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react';
+import { Loading, links as LoadingLinks } from '~/components/Loading';
 
 export const meta: MetaFunction = () => ({ title: 'Tech Snacks' });
 
@@ -27,7 +28,8 @@ export const headers: HeadersFunction = () => ({
 });
 
 export const links: LinksFunction = () => [
-  ...layoutLinks,
+  ...layoutLinks(),
+  ...LoadingLinks(),
   {
     rel: 'stylesheet',
     href: 'https://cdn.jsdelivr.net/npm/holiday.css@0.9.8',
@@ -50,6 +52,7 @@ export default function App(): JSX.Element {
           <Outlet />
         </Main>
         <Footer />
+        <Loading />
 
         <ScrollRestoration />
         <Scripts />

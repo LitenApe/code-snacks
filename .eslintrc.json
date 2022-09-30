@@ -30,7 +30,8 @@
           "react-dom/*",
           "~/services/*",
           "~/components/*",
-          "highlight.js/**/*"
+          "highlight.js/**/*",
+          "dirty-kitchen/lib/*"
         ]
       }
     ],
