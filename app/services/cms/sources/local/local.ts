@@ -46,7 +46,7 @@ export class Local implements Source {
     const filesAndFolders = await readContentDirectory(this.#content_location);
 
     const fileContents = filesAndFolders.map(async (name) => ({
-      id: name,
+      id: name.split('.')[0],
       content: await readFileContent(this.#content_location, name),
     }));
 
