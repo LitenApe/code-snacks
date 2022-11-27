@@ -7,8 +7,8 @@ import {
 } from './domain';
 import { contentProcessor, frontmatterProcessor } from './processors';
 
-import type { Logger } from '../logger';
-import { getLogger } from '../logger';
+import type { Logger } from '~/services/logger';
+import { getLogger } from '~/services/logger';
 import { isValidFrontmatter } from './helpers';
 
 class TextProcessor implements Processor {

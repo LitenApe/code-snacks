@@ -31,7 +31,7 @@ export class Local implements Source {
         content,
       };
     } catch (err) {
-      this.#logger.warn(
+      this.#logger.error(
         `Encountered an error while retrieving post with [id=${id}], [error=${err}]`,
       );
       throw new Error(`Unable to retrieve post with [id=${id}]`);

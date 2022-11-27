@@ -12,9 +12,7 @@ export class GrayMatter implements FrontmatterProcessor {
   }
 
   getFrontmatter(content: string): Partial<Frontmatter> {
-    this.#logger.debug(
-      `Extracting frontmatter from content of [length=${content.length}]`,
-    );
+    this.#logger.trace('Extracting frontmatter from content');
 
     const { data } = matter(content);
     return data;
@@ -24,9 +22,7 @@ export class GrayMatter implements FrontmatterProcessor {
     frontmatter: Partial<Frontmatter>;
     content: string;
   } {
-    this.#logger.debug(
-      `Extracting frontmatter and content from content of [length=${rawContent.length}]`,
-    );
+    this.#logger.trace('Extracting frontmatter and content');
 
     const { data, content } = matter(rawContent);
     return {

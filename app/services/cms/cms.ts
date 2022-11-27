@@ -1,17 +1,18 @@
 import { Content, Frontmatter, Source } from './domain';
 import { isFulfilledPromise, sortByDate } from './helpers';
 
-import type { Logger } from '../logger';
-import { TextProcessor } from '../text_processor';
-import { getLogger } from '../logger';
+import type { Logger } from '~/services/logger';
+import type { Processor } from '~/services/text_processor';
+import { TextProcessor } from '~/services/text_processor';
+import { getLogger } from '~/services/logger';
 import { source } from './sources';
 
 class CMS {
   #logger: Logger;
 
-  #src;
+  #src: Source;
 
-  #processor;
+  #processor: Processor;
 
   constructor(src: Source) {
     this.#logger = getLogger('CMS');
@@ -20,7 +21,7 @@ class CMS {
   }
 
   async getPosts(): Promise<Array<Frontmatter>> {
-    this.#logger.debug('Retrieving posts');
+    this.#logger.trace('Retrieving posts');
     const rawPosts = await this.#src.getPosts();
 
     const posts = rawPosts.map(async ({ id, content }) => ({
@@ -37,7 +38,7 @@ class CMS {
   }
 
   async getPost(id: string): Promise<Content> {
-    this.#logger.debug(`Retrieving post with [id=${id}]`);
+    this.#logger.trace(`Retrieving post with [id=${id}]`);
 
     try {
       const post = await this.#src.getPost(id);
@@ -46,10 +47,10 @@ class CMS {
         ...this.#processor.getContent(post.content),
       };
     } catch (err) {
-      this.#logger.warn(
+      this.#logger.error(
         `Unable to retrieve post with [id=${id}] due to [error=${err}]`,
       );
-      throw new Error(`Unable to extract content with [id=${id}]`);
+      throw new Error(`Unable to retrieve post with [id=${id}]`);
     }
   }
 }
