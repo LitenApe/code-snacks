@@ -1,9 +1,9 @@
 import { lstat, readFile, readdir } from 'fs/promises';
 
-import { Logger } from '~/services/logger';
+import { getLogger } from '~/services/logger';
 import { join } from 'path';
 
-const logger = new Logger('File Reader Utils');
+const logger = getLogger('File Reader Utils');
 
 export async function readContentDirectory(
   dirpath: string,

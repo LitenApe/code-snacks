@@ -1,10 +1,11 @@
 import { InternalServerError } from './InternalServerError';
-import { Logger } from '~/services/logger';
+import { getLogger } from '~/services/logger';
+
+const logger = getLogger('ErrorBoundary');
 
 export function ErrorBoundary(props: { error: Error }): JSX.Element {
   const { error } = props;
   const { message, stack } = error;
-  const logger = new Logger('ErrorBoundary');
   logger.error(`[message=${message}]`, `[stack=${stack}]`);
   return <InternalServerError />;
 }

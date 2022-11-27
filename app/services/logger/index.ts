@@ -1,1 +1,2 @@
-export { Logger } from './logger';
+export { getLogger } from './logger';
+export type { Logger } from './domain';

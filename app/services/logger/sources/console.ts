@@ -1,20 +1,25 @@
 /* eslint-disable no-console */
-import type { Logg } from '../domain';
 
-export class Console implements Logg {
+import type { Source } from 'dirty-kitchen/lib/logger';
+
+export class Console implements Source {
+  trace(...args: Array<unknown>): void {
+    console.trace('[level=TRACE]', ...args);
+  }
+
   debug(...args: Array<unknown>): void {
-    console.debug(...args);
+    console.debug('[level=DEBUG]', ...args);
   }
 
   info(...args: Array<unknown>): void {
-    console.info(...args);
+    console.info('[level=INFO]', ...args);
   }
 
   warn(...args: Array<unknown>): void {
-    console.warn(...args);
+    console.warn('[level=WARN]', ...args);
   }
 
   error(...args: Array<unknown>): void {
-    console.error(...args);
+    console.error('[level=ERROR]', ...args);
   }
 }

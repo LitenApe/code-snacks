@@ -1,19 +1,20 @@
 import { Content, Frontmatter, Source } from './domain';
 import { isFulfilledPromise, sortByDate } from './helpers';
 
-import { Logger } from '../logger';
+import type { Logger } from '../logger';
 import { TextProcessor } from '../text_processor';
+import { getLogger } from '../logger';
 import { source } from './sources';
 
 class CMS {
-  #logger;
+  #logger: Logger;
 
   #src;
 
   #processor;
 
   constructor(src: Source) {
-    this.#logger = new Logger('CMS');
+    this.#logger = getLogger('CMS');
     this.#src = src;
     this.#processor = TextProcessor;
   }

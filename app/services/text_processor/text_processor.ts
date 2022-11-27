@@ -7,7 +7,8 @@ import {
 } from './domain';
 import { contentProcessor, frontmatterProcessor } from './processors';
 
-import { Logger } from '../logger';
+import type { Logger } from '../logger';
+import { getLogger } from '../logger';
 import { isValidFrontmatter } from './helpers';
 
 class TextProcessor implements Processor {
@@ -18,7 +19,7 @@ class TextProcessor implements Processor {
   #cProcessor: ContentProcessor;
 
   constructor(fProcessor: FrontmatterProcessor, cProcessor: ContentProcessor) {
-    this.#logger = new Logger('TextProcessor');
+    this.#logger = getLogger('TextProcessor');
 
     this.#fProcessor = fProcessor;
     this.#cProcessor = cProcessor;

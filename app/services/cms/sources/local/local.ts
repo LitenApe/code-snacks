@@ -1,7 +1,8 @@
 import { RawContent, Source } from '../../domain';
 import { readContentDirectory, readFileContent } from './file_reader_utils';
 
-import { Logger } from '~/services/logger';
+import type { Logger } from '~/services/logger';
+import { getLogger } from '~/services/logger';
 
 export class Local implements Source {
   #logger: Logger;
@@ -9,7 +10,7 @@ export class Local implements Source {
   #content_location: string;
 
   constructor() {
-    this.#logger = new Logger('CMS:Local');
+    this.#logger = getLogger('CMS:Local');
 
     const contentDirLocation = process.env.CONTENT_LOCATION;
 

@@ -1,7 +1,7 @@
 import { BadRequest } from './BadRequest';
-import { Logger } from '~/services/logger';
 import { NotFound } from './NotFound';
 import { Unauthorized } from './Unauthorized';
+import { getLogger } from '~/services/logger';
 import { useCatch } from '@remix-run/react';
 
 function getExceptionMessage(status: number): JSX.Element {
@@ -17,8 +17,9 @@ function getExceptionMessage(status: number): JSX.Element {
   }
 }
 
+const logger = getLogger('CatchBoundary');
+
 export function CatchBoundary(): JSX.Element {
-  const logger = new Logger('CatchBoundary');
   const caught = useCatch();
   const children = getExceptionMessage(caught.status);
   logger.error(`[status=${caught.status}]`, `[data=${caught.data}]`);
