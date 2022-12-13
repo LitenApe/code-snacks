@@ -1,16 +1,16 @@
 type Level = 'trace' | 'debug' | 'info' | 'warn' | 'error';
-type LoggFunction = (message: string) => void;
+type LogFunction = (message: string) => void;
 type Source = {
-  trace: LoggFunction;
-  debug: LoggFunction;
-  info: LoggFunction;
-  warn: LoggFunction;
-  error: LoggFunction;
+  trace: LogFunction;
+  debug: LogFunction;
+  info: LogFunction;
+  warn: LogFunction;
+  error: LogFunction;
 };
 
 const hierarchy = ['trace', 'debug', 'info', 'warn', 'error'];
 function mute(environment: Level, current: Level): boolean {
-  return hierarchy.indexOf(current) >= hierarchy.indexOf(environment);
+  return hierarchy.indexOf(environment) <= hierarchy.indexOf(current);
 }
 
 export class Logger {
@@ -24,7 +24,7 @@ export class Logger {
     this.#level = level;
   }
 
-  private logg(level: Level, ...message: Array<unknown>): void {
+  private log(level: Level, ...message: Array<unknown>): void {
     if (!mute(this.#level, level)) {
       this.#src[level](
         `[name=${this.#name}][level=${level}]: ${message.join('. ')}`,
@@ -33,23 +33,23 @@ export class Logger {
   }
 
   trace(...args: Array<unknown>): void {
-    this.logg('trace', args);
+    this.log('trace', args);
   }
 
   debug(...args: Array<unknown>): void {
-    this.logg('debug', args);
+    this.log('debug', args);
   }
 
   info(...args: Array<unknown>): void {
-    this.logg('info', args);
+    this.log('info', args);
   }
 
   warn(...args: Array<unknown>): void {
-    this.logg('warn', args);
+    this.log('warn', args);
   }
 
   error(...args: Array<unknown>): void {
-    this.logg('error', args);
+    this.log('error', args);
   }
 }
 
@@ -79,10 +79,10 @@ export function factory(level: Level, src: Source): (name: string) => Logger {
   return (name: string): Logger => new Logger(name, level, src);
 }
 
-const loggFactory = factory('warn', new ConsoleAdapter());
-const logg = loggFactory('Logg ID');
+const logFactory = factory('warn', new ConsoleAdapter());
+const log = logFactory('Log ID');
 
-logg.info(
-  "Here is a info logg statement, it will be ignored due to the level argument on line 82, where the environemt logg level has been set to 'warn'",
+log.info(
+  "Here is a info log statement, it will be ignored due to the level argument on line 82, where the environemt log level has been set to 'warn'",
   'However, if it did output something, it would look something like this: [level=INFO][name=Logg ID]: <...>',
 );
