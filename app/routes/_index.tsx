@@ -1,6 +1,8 @@
 import { CMS, Frontmatter } from '~/services/cms';
 
+import { CatchBoundary as KnownExceptionBoundary } from '~/components/CatchBoundary';
 import { PostPreview } from '~/components/PostPreview';
+import { ErrorBoundary as UnknownExceptionBoundary } from '~/components/ErrorBoundary';
 import { useLoaderData } from '@remix-run/react';
 
 type Data = Array<Frontmatter>;
@@ -36,4 +38,13 @@ export default function Index(): JSX.Element {
       </ul>
     </>
   );
+}
+
+export function CatchBoundary() {
+  return <KnownExceptionBoundary />;
+}
+
+export function ErrorBoundary(props: { error: Error }) {
+  const { error } = props;
+  return <UnknownExceptionBoundary error={error} />;
 }

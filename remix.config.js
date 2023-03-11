@@ -8,4 +8,7 @@ module.exports = {
   ignoredRouteFiles: ['.*'],
   publicPath: '/build/',
   serverBuildDirectory: 'build',
+  future: {
+    v2_routeConvention: true,
+  },
 };
