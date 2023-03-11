@@ -10,7 +10,7 @@ enum NAVIGATION_MODE {
 }
 
 function useViewController() {
-  const containerRef = useRef<HTMLElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [mode, setMode] = useState<NAVIGATION_MODE | null>(null);
 
   const updateNavigationMode = useCallback(
@@ -49,7 +49,7 @@ export function SkipLinks(): JSX.Element {
   const { ref } = useViewController();
 
   return (
-    <nav ref={ref} id="skip-links" tabIndex={-1}>
+    <div ref={ref} id="skip-links" aria-label="skip-links" tabIndex={-1}>
       <ul>
         <li>
           <a href={`#${Landmarks.NAVBAR}`}>Navigation bar</a>
@@ -61,6 +61,6 @@ export function SkipLinks(): JSX.Element {
           <a href={`#${Landmarks.FOOTER}`}>Footer</a>
         </li>
       </ul>
-    </nav>
+    </div>
   );
 }
