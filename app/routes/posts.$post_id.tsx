@@ -1,5 +1,5 @@
 import { CMS, Content } from '~/services/cms';
-import { LoaderFunction, MetaFunction } from '@remix-run/node';
+import { LinkDescriptor, LoaderFunction, MetaFunction } from '@remix-run/node';
 
 import { DangerousHTML } from '~/components/DangerousHTML';
 import { Time } from '~/components/Time';
@@ -57,7 +57,7 @@ export const meta: MetaFunction = (args) => {
   };
 };
 
-export function links() {
+export function links(): Array<LinkDescriptor> {
   return [
     {
       rel: 'stylesheet',
